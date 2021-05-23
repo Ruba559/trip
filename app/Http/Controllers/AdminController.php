@@ -67,17 +67,34 @@ class AdminController extends Controller
     function serviceTable()
     { 
 
-       $certificate_registration_id_notproven = Certificate_Registration::where('is_a_proven' , '0')
-       ->get()->pluck("id")->toArray();
-
-       $servicemanegarnotproven = ServiceManegar::whereIn('Certificate_Registration_id' ,  $certificate_registration_id_notproven )
-      ->get();
-
-
-       $certificate_registration_id_proven = Certificate_Registration::where('is_a_proven' , '1')
-       ->get()->pluck("id")->toArray();
-
-       $servicemanegarproven = ServiceManegar::whereIn('Certificate_Registration_id' ,  $certificate_registration_id_proven )->get();
+        $servicemanegarnotproven =Place::with(['serviceManegar'=> function($query){
+            $query->select(
+             'id',
+            'first_name',
+            'Email',
+            'last_name',
+            'password',
+            'phone_number',
+            'photo_certificate',
+            'is_a_proven',
+            'place_id',
+        )->where('is_a_proven',"0");
+           }])->get();
+ 
+           $servicemanegarproven =Place::with(['serviceManegar'=> function($query){
+            $query->select(
+             'id',
+            'first_name',
+            'Email',
+            'last_name',
+            'password',
+            'phone_number',
+            'photo_certificate',
+            'is_a_proven',
+            'place_id',
+        )->where('is_a_proven',"1");
+           }])->get();
+      
 
         return view('admin.service' ,  ['servicemanegarsnotproven' => $servicemanegarnotproven , 'servicemanegarsproven' => $servicemanegarproven]); 
  

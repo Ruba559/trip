@@ -37,12 +37,14 @@ wrapper[data-layout=horizontal] .topbar .navbar-collapse[data-navbarbg=skin5], #
         @include('layouts.header')
     <header class="masthead text-center text-white">
         <div class="masthead-content">
-            <div class="container">
+            <div class="container"><form action="place_info" method="POST">@csrf
                 @foreach ($places as $place)
            <h1 class="masthead-heading mb-0">{{ $place->place_name}}</h1> 
           
-              <h2 class="masthead-subheading mb-0">&nbsp;</h2><a class="btn btn-dark btn-xl rounded-pill mt-5" role="button" href="/place_info">Edit place information</a></div>
+              <h2 class="masthead-subheading mb-0">&nbsp;</h2><button type="submit" class="btn btn-dark btn-xl rounded-pill mt-5" role="button">Edit place information</button></div>
+              <input type="hidden" name="id" value="{{ $place->id}}">
               @endforeach
+            </form>
         </div>
         <div class="bg-circle-1 bg-circle"></div>
         <div class="bg-circle-2 bg-circle"></div>

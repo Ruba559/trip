@@ -139,7 +139,7 @@
                                             data-toggle-column="first">
                                             <thead>
                                                 <tr>
-                                                    <th data-breakpoints="xs">ID</th>
+                            
                                                     <th>First Name</th>
                                                     <th>Last Name</th>
                                                     <th data-breakpoints="xs sm">Mobile No</th>
@@ -157,22 +157,26 @@
                                             </thead>
                                             <tbody>
                                                 <!--=====Row======-->
-                                                @foreach($servicemanegarsnotproven as $servicemanegarnotproven)
 
                                                 <tr data-expanded="false" class="search-items">
-                                                    <td>1</td>
+                                                   
+                                                    @foreach ($servicemanegarsnotproven as $item)
+                                        
+                                    
+                                                    @foreach($item->serviceManegar as $row)
+                                                    
                                                     <td>
                                                         <a href="javascript:void(0)"><img
                                                                 src="../assets/images/users/4.jpg" alt="user" width="40"
-                                                                class="rounded-circle" />{{ $servicemanegarnotproven->first_name }}</a>
+                                                                class="rounded-circle" />{{ $row->first_name }}</a>
                                                     </td>
                                                     
-                                                    <td>{{ $servicemanegarnotproven->last_name }}</td>
-                                                    <td>{{ $servicemanegarnotproven->phone_number }}</td>
-                                                    <td>{{ $servicemanegarnotproven->Email }}</td>
+                                                    <td>{{ $row->last_name }}</td>
+                                                    <td>{{ $row->phone_number }}</td>
+                                                    <td>{{ $row->Email }}</td>
                                                     <td><span class="label label-danger">   1/2/1998</span> </td>
 
-                                                    <td>Foure Season</td>
+                                                    <td>{{ $row->place_name }}</td>
                                                     <td>City Center</td>
                                                     <td>Abo remana</td>
                                                     <td>ForSeason@gmail.com</td>
@@ -242,7 +246,7 @@
                                                 <td>{{ $servicemanegarproven->phone_number }}</td>
                                                 <td>{{ $servicemanegarproven->Email }}</td>
                                                 <td><span class="label label-danger">   1/2/1998</span> </td>
-                                                <td>Dama Rose</td>
+                                                <td>{{ $servicemanegarproven->Email }}</td>
                                             
                                                 <td><a class="text-dark ml-2" ><i class="mdi mdi-delete font-20" data-toggle="modal" data-target="#centermodal"></i></a>
                                                 </td>
@@ -276,6 +280,7 @@
                             </div>
                         </div>
                         </div>
+                        @endforeach
                         @endforeach
                     </tbody>
                 </table>

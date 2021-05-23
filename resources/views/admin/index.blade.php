@@ -33,7 +33,7 @@
                         <h1>welcome Admin</h1>
                         <p>as Admin&nbsp;can now manage the site like users table and service managers tables<br><br></p>
                     </div>
-                    <div class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder"><img class="pulse animated" src="assets/images/hh.jpg" style="width: 100%;">
+                    <div class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder"><img class="pulse animated" src="images/hh.jpg" style="width: 100%;">
                         <div class="iphone-mockup"></div>
                     </div>
                 </div>
@@ -47,11 +47,11 @@
                 <p class="text-center">you can manage the service managers , users account and places table<br></p>
             </div>
             <div class="row articles">
-                <div class="col-sm-6 col-md-4 item"><a href="/user_table"><img class="img-fluid animated pulse" data-bs-hover-animate="pulse" src="assets/images/users table.jpg"></a>
+                <div class="col-sm-6 col-md-4 item"><a href="/user_table"><img class="img-fluid animated pulse" data-bs-hover-animate="pulse" src="images/users table.jpg"></a>
                     <h3 class="name">Users table<br></h3><a class="action" href="/user_table"><i class="fa fa-arrow-circle-right"></i></a></div>
-                <div class="col-sm-6 col-md-4 item"><a href="/service_table"><img class="img-fluid animated pulse" data-bs-hover-animate="pulse" src="assets/images/SM table.jpg"></a>
+                <div class="col-sm-6 col-md-4 item"><a href="/service_table"><img class="img-fluid animated pulse" data-bs-hover-animate="pulse" src="images/SM table.jpg"></a>
                     <h3 class="name">Service managers&nbsp;table<br></h3><a class="action" href="/service_table"><i class="fa fa-arrow-circle-right"></i></a></div>
-                <div class="col-sm-6 col-md-4 item"><a href="/place_table"><img class="img-fluid animated pulse" data-bs-hover-animate="pulse" src="assets/images/places table.jpg"></a>
+                <div class="col-sm-6 col-md-4 item"><a href="/place_table"><img class="img-fluid animated pulse" data-bs-hover-animate="pulse" src="images/places table.jpg"></a>
                     <h3 class="name">places table<br></h3><a class="action" href="/place_table"><i class="fa fa-arrow-circle-right"></i></a></div>
             </div>
         </div>

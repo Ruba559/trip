@@ -17,11 +17,11 @@ class ServiceManegar extends Authenticatable
     protected $fillable = [
         'first_name'  ,
         'last_name'    ,
-        'Email'       ,
+        'Email '       ,
         'phone_number' ,
         'password'   ,
-         
-        'Certificate_Registration_id ',
+        'is_a_proven',
+         'photo_certificate',
         'created_at ',
         'updated_at ',
         

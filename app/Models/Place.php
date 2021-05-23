@@ -43,7 +43,7 @@ class Place extends Model
 
     public function serviceManegar()
     {
-        return $this->belongsTo(ServiceManegar::class);
+        return $this->hasMany(ServiceManegar::class);
     }
 
 }

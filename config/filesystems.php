@@ -53,7 +53,7 @@ return [
         ],
         'images' => [
             'driver' => 'local',
-            'root' =>  public_path('/assets/images'),
+            'root' =>  public_path('/images'),
             'url' => env('APP_URL').'/public',
             'visibility' => 'public',
         ],

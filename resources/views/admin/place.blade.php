@@ -32,7 +32,7 @@
                 <div class="col-md-5 col-12 align-self-center">
                     <h3 class="text-themecolor mb-0">Places table</h3>
                     <ol class="breadcrumb mb-0 p-0 bg-transparent">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/index_admin">Home</a></li>
                         <li class="breadcrumb-item active">Places table</li>
                     </ol>
                 </div>
@@ -62,7 +62,7 @@
                         <div class="table-responsive">
                             <table class="table table-striped search-table v-middle">
                                 <thead class="header-item">
-									<th class="text-dark font-weight-bold"></th>
+									
                                     <th class="text-dark font-weight-bold"><i class="icon-user"></i> Name</th>
                                     <th class="text-dark font-weight-bold"><i class=" mdi mdi-email-outline"></i> Email</th>
                                     <th class="text-dark font-weight-bold"><i class=" fas fa-star"></i> Stars</th>
@@ -83,12 +83,10 @@
                                         
                                     
                                     @foreach($item->place as $row)
-                                    <td>
-                                   
-                                   
+                                    
+                        
                                     <tr class="search-items">
                                     
-									
                                         <td>
                                             
 											 <span class="user-name mb-0">{{ $row['place_name']}}</span>

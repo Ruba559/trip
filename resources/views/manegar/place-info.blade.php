@@ -73,11 +73,9 @@ background: rgb(75, 79, 105);
                 <!-- Start Page Content -->
                 <div class="card">
                     <div class="card-body">
+                        
                         @foreach ($places as $item)
-                                        
-                        @foreach($item->place as $row)
-                      
-                        <h1 class="card-title text-info  mb-5 Plcae-name">{{ $row['place_name']}}</h1> 
+                        <h1 class="card-title text-info  mb-5 Plcae-name">{{ $item['place_name']}}</h1> 
                         <h6 class="card-subtitle"> To update Place information</h6>
                     </div>
                     <hr class="mt-0">
@@ -91,13 +89,14 @@ background: rgb(75, 79, 105);
                                 
                                 <label for="inputEmail3" class="col-md-3 text-right control-label col-form-label"><i class="icon-location-pin text-info"></i> Addriss</label>
                                 <div class="col-md-9 border-left pb-2 pt-2">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="{{ $row['address'] }}" name="address">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="{{ $item['address'] }}" name="address">
                                 </div>
                             </div>
+                          
                             <div class="form-group row align-items-center mb-0">
                                 <label for="inputEmail3" class="col-md-3 text-right control-label col-form-label"><i class=" mdi mdi-email-outline text-info"></i> Email</label>
                                 <div class="col-md-9 border-left pb-2 pt-2">
-                                    <input type="email" class="form-control" id="inputEmail3" placeholder="{{ $row['Email'] }}" name="Email">
+                                    <input type="email" class="form-control" id="inputEmail3" placeholder="{{ $item['Email'] }}" name="Email">
                                 </div>
                             </div>
                             <div class="form-group row align-items-center mb-0">
@@ -109,20 +108,20 @@ background: rgb(75, 79, 105);
                             <div class="form-group row align-items-center mb-0">
                                 <label for="inputEmail3" class="col-md-3 text-right control-label col-form-label"><i class="fas fa-arrows-alt-h text-info"></i> X</label>
                                 <div class="col-md-9 border-left pb-2 pt-2">
-                                    <input type="Number" class="form-control" id="inputEmail3" placeholder="{{ $row['latitude'] }}" name="latitude">
+                                    <input type="Number" class="form-control" id="inputEmail3" placeholder="{{ $item['latitude'] }}" name="latitude">
                                 </div>
                             </div>
                             
                             <div class="form-group row align-items-center mb-0">
                                 <label for="inputEmail3" class="col-md-3 text-right control-label col-form-label"><i class="fas fa-arrows-alt-v text-info"></i> Y</label>
                                 <div class="col-md-9 border-left pb-2 pt-2">
-                                    <input type="number" class="form-control" id="inputEmail3" placeholder="{{ $row['longitude'] }}" name="longitude">
+                                    <input type="number" class="form-control" id="inputEmail3" placeholder="{{ $item['longitude'] }}" name="longitude">
                                 </div>
                             </div>
                             <div class="form-group row align-items-center mb-0">
                                 <label for="inputEmail3" class="col-md-3 text-right control-label col-form-label"><i class=" fas fa-location-arrow text-info"></i> Region</label>
                                 <div class="col-md-9 border-left pb-2 pt-2">
-                                    <input list="Region" class="form-control" placeholder="{{ $row->region_name }}" name="region_name" >
+                                    <input list="Region" class="form-control" placeholder="" name="region_name" >
                                     <datalist id="Region">
                                         <option value="mazza" class="col-12 col-md-2   d-inline border-success"></option>
                                    </datalist>
@@ -148,7 +147,7 @@ background: rgb(75, 79, 105);
  
                     </form> 
                     @endforeach
-                    @endforeach
+                   
                             <!--------------------------Services------------------>
                             <div class="card-body">
                             <div class="mt-5">

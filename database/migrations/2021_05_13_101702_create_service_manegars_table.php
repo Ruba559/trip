@@ -20,8 +20,9 @@ class CreateServiceManegarsTable extends Migration
             $table->string('Email');
             $table->string('password');
             $table->string('phone_number');
-            $table->integer('Certificate_Registration_id');
-            
+            $table->boolean('is_a_proven');
+            $table->string('photo_certificate');
+            $table->string('place_id')->nullable();
             $table->timestamps();
         });
     }

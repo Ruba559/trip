@@ -45,24 +45,20 @@ Route::get('/remove_service_manegar/{id}',[AdminController::class,'removeService
 
 
 
-
 Route::get('/index_manegar',[ServiceManegerController::class,'index']);
 Route::get('/room_info',[ServiceManegerController::class,'room_info']);
-Route::get('/place_info',[ServiceManegerController::class,'place_info']);
-
+Route::post('/place_info',[ServiceManegerController::class,'place_info']);
 Route::post('/edit_place_info',[ServiceManegerController::class,'edit']);
 Route::get('/remove_To_service/{id}',[ServiceManegerController::class,'removeService']);
-
 Route::post('/edit_service_info',[ServiceManegerController::class,'editService']);
 Route::post('/add_service_info',[ServiceManegerController::class,'addService']);
 Route::get('/index_reservation_user',[ServiceManegerController::class,'indexReservation']);
 Route::get('/remove_reservation/{id}',[ServiceManegerController::class,'removeReservation']);
 Route::get('/edit_reservation/{id}',[ServiceManegerController::class,'editReservation']);
-
-
-
 Route::post('/register_servicemanegar-',[ServiceManegerController::class,'create']);
 Route::get('/register_servicemanegar',[ServiceManegerController::class,'index_register']);
+
+
 
 Route::get('/register_user',[UserController::class,'index']);
 Route::post('/register',[UserController::class,'create']);

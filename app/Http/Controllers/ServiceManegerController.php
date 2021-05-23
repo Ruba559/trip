@@ -18,11 +18,9 @@ class ServiceManegerController extends Controller
 
     function index()
     {
-        $id = ServiceManegar::where('id',2)->pluck("id")->toArray();
-      
-        $place = Place::where('service_manegar_id',$id)->get();
+        $id = Place::where('id',2)->with('serviceManegar')->get();
      
-        return view('manegar.index', ['places' => $place ]);
+        return view('manegar.index', ['places' => $id ]);
     }
 
 
@@ -44,26 +42,16 @@ class ServiceManegerController extends Controller
         return view('manegar.register');
     }
 
-    function place_info()
+    function place_info(Request $req)
     {
 
-        $place =Regoin::with(['place'=> function($query){
-            $query->select(
-             'id',
-            'place_name',
-            'stars',
-            'Email',
-            'place_type',
-            'address',
-            'regoin_id',
-        )->where('service_manegar_id', 2);
-           }])->first();
-          
+        $places= Place::find($req->id);
 
-        $service = Service::where('place_id', $place->id)->get();
+        $place= $places->load('regoin');
 
-        dd($place);
-       
+        $service = Service::where('place_id', $req->id)->get();
+
+        
         return view('manegar.place-info', ['services' => $service ,'places' =>  $place ]  );
     }
 

@@ -8,17 +8,11 @@ use Illuminate\Support\Collection;
 use App\Models\Regoin;
 use App\Models\Certificate_Registration;
 use App\Models\ServiceManegar;
-
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    function index()
-    { 
-         return view('admin.index'); 
- 
-    }
-
-
+   
     function placeTable()
     { 
         
@@ -67,35 +61,10 @@ class AdminController extends Controller
     function serviceTable()
     { 
 
-        $servicemanegarnotproven =Place::with(['serviceManegar'=> function($query){
-            $query->select(
-             'id',
-            'first_name',
-            'Email',
-            'last_name',
-            'password',
-            'phone_number',
-            'photo_certificate',
-            'is_a_proven',
-            'place_id',
-        )->where('is_a_proven',"0");
-           }])->get();
+        $servicemanegarnotproven =ServiceManegar::where('is_a_proven',"0")->get();
  
-           $servicemanegarproven =Place::with(['serviceManegar'=> function($query){
-            $query->select(
-             'id',
-            'first_name',
-            'Email',
-            'last_name',
-            'password',
-            'phone_number',
-            'photo_certificate',
-            'is_a_proven',
-            'place_id',
-        )->where('is_a_proven',"1");
-           }])->get();
-      
-
+        $servicemanegarproven =ServiceManegar::where('is_a_proven',"1")->get();
+    
         return view('admin.service' ,  ['servicemanegarsnotproven' => $servicemanegarnotproven , 'servicemanegarsproven' => $servicemanegarproven]); 
  
     }
@@ -107,5 +76,26 @@ class AdminController extends Controller
         ServiceManegar::destroy($id);
 
         return redirect('service_table');
+    }
+
+    function addProven($id)
+    {
+         
+        $serviceManegar = ServiceManegar::find($id);
+
+        $serviceManegar->is_a_proven  = "1";
+
+        $serviceManegar->update();
+      
+
+       return redirect('/service_table');
+    }
+    
+    
+    public function getLogout()
+    {
+        Auth::logout();
+
+        return redirect('/');
     }
 }

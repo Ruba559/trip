@@ -3,20 +3,15 @@
 
 @section('content_head')
 
-<style>
-    .HrefBooking{
-        color:slategrey;
-        text-decoration: none;
-    }
-    a:hover{
-        text-decoration: none;
-    }
-</style>
 
+<link href="lib/footer.css" rel="stylesheet">
 @endsection
 
 @section('content')
-<body>
+
+ 
+@include('layouts.header-sm')
+  
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -29,54 +24,12 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
+    
     <div id="main-wrapper">
        <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
-        @include('layouts.header')
-      
-        <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- User profile -->
-                <div class="user-profile position-relative" style="background-color:rgb(93, 118, 133) ; ">
-                    <!-- User profile image -->
-                    <div class="profile-img"> <img src="../assets/images/users/6.jpg" alt="user" class="w-100 rounded-circle" /> </div>
-                    <!-- User profile text-->
-                    <div class="profile-text pt-1"> 
-                        <sapn class=" UserName w-100 text-white d-block position-relative"role="button" aria-haspopup="true" aria-expanded="true">Rula hamed</span>
-                        
-                    </div>
-                </div>
-                <!-- End User profile text-->
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                   
-                        
-                
-                    <ul id="sidebarnav" class="in">
-                        
-                
-                        
-                        <ul aria-expanded="false" class="collapse first-level in">
-                            <li class="sidebar-item "><a href="overlay-Place Info.html" class="sidebar-link "><i class="fas fa-info"></i><span class="hide-menu"> Place Info </span></a></li>
-                            <li class="sidebar-item active"><a href="overlay-Rooms table.html" class="sidebar-link active"><i class="fas fa-table"></i> <span class="hide-menu"> Rooms Table </span></a></li>
-                            <li class="sidebar-item"><a href="overlay-Reservation dates.html" class="sidebar-link"><i class="fas fa-calendar-alt"></i><span class="hide-menu">Reservation dates </span></a></li>
-                            <li class="sidebar-item"><a href="proUserProfile.html" class="sidebar-link"><i class="fas fa-user"></i><span class="hide-menu">Profile </span></a></li>
-                            
-                        </ul>
-                   
-        
-        <!-- End Bottom points-->
-    </ul>
-                       
-                        
-            <!-- Bottom points-->
-            <div class="sidebar-footer">
-               
-                <a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
-            </div>
-            <!-- End Bottom points-->
-        </aside>
+     
+
         <div class="page-wrapper">
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
@@ -117,6 +70,7 @@
                                     <th class="text-dark font-weight-bold">RoomID</th>
                                     <th class="text-dark font-weight-bold">Price</th>
                                     <th class="text-dark font-weight-bold">Number Of Guests</th>
+                                    <th class="text-dark font-weight-bold">Description</th>
                                     <th class="text-dark font-weight-bold">Photo</th>
                                     <th class="text-dark font-weight-bold"></th>
                                     <th class="text-center">
@@ -127,25 +81,29 @@
                                 </thead>
                                 <tbody>
                                     <!-- row -->
+                                    @foreach ($rooms as $item)
+                                    
+                                    @foreach($item->room as $row)
                                    
-                                    @foreach ($rooms as $room)
 
                                     <tr class="search-items">
                                        
                                        
                                         <td>
-                                            <span>{{ $room->id }}</span>
+                                            <span>{{ $row->id }}</span>
                                         </td>
                                         <td>
-                                            <span>{{ $room->price  }}</span>
+                                            <span>{{ $row->price  }}</span>
                                         </td>
                                         <td>
-                                            <span>{{ $room->count_people }}</span>
+                                            <span>{{ $row->count_people }}</span>
                                         </td>
-                                    
+                                        <td>
+                                            <span>{{ $row->description }}</span>
+                                        </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <img class="srcPhoto" src="{{ $room->price }}"  width="35" data-toggle="modal" data-target="#PhotoModal">
+                                                <img class="srcPhoto" src="{{ $row->price }}"  width="35" data-toggle="modal" data-target="#PhotoModal">
                                                 <div class="ml-2">
                                                     <div class="user-meta-info">
                                                         <h5 class="TsTherePhoto"></h5>
@@ -155,7 +113,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="overlay-Reservation dates.html" class="HrefBooking">Reservation dates</a>
+                                            <a href="/index_reservation_user/{{ $row->id }}" class="HrefBooking">Reservation dates</a>
                                         </td>
                                         <td class="text-center">
                                             <div class="action-btn">
@@ -166,9 +124,7 @@
                                     </tr>
                                     <!-- /.row -->
                                 
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                   
                         </div>
                     </div>
                 </div>
@@ -176,9 +132,7 @@
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
             </div>
-            <footer class="footer text-center">
-                @Trips aid team
-            </footer>
+        
         </div>
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
@@ -200,7 +154,7 @@
                             <p class="font-20 font-weight-bolder text-dark">Are you sure to Delete This Row ?</p>
                             <div class="modal-footer">
                                 <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
-                                <button id="BookingUnConf" class="btn btn-danger"  data-dismiss="modal">Delete</button>
+                                <a href="remove_room/{{ $row->id }}" id="BookingUnConf" class="btn btn-danger">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -233,10 +187,21 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group row">
                                             <label class="col-sm-3 text-right control-label col-form-label">Price</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="Price" placeholder="Price for night">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 text-right control-label col-form-label">Description</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="Price" placeholder="Price for night">
                                             </div>
@@ -279,15 +244,18 @@
                         </div>
                         <div class="modal-body">
                             <div class="card-body">
-                                <form action="room_info" method="POST">
+                                <form action="add_room" method="POST" enctype="multipart/form-data">
                                     @csrf
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group row">
                                             <label for="cono12" class="col-sm-3 text-right control-label col-form-label">Number of  guest</label>
                                             <div class="col-sm-9">
-                                                <input type="number" class="form-control" id="GuestNo" placeholder="Nimber of guest">
+                                                <input type="number" name="count_people" class="form-control" id="GuestNo" placeholder="Nimber of guest">
                                             </div>
+                                            @error('count_people')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -296,7 +264,20 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 text-right control-label col-form-label">Price</label>
                                             <div class="col-sm-9">
-                                                <input type="number" class="form-control" id="Price" placeholder="Price for night">
+                                                <input type="number" name="price" class="form-control" id="Price" placeholder="Price for night">
+                                            </div>
+                                            @error('price')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 text-right control-label col-form-label">Description</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="description" class="form-control" id="Price" placeholder="Description">
                                             </div>
                                         </div>
                                     </div>
@@ -305,16 +286,19 @@
                                     <div class="col-sm-12">
                                         <div class="form-group row">
                                             <label class="col-sm-3 text-right control-label col-form-label">photo</label>
-                                            <button class="btn btn-light-info mb-2"><label for="RoomPhoto">Upload Photo</label> </button>
+                                           <label for="RoomPhoto">Upload Photo</label>
                                                 <img  width="75%" style="margin-left: 13%;">
-                                                <input type="file" class="d-none" id="RoomPhoto" accept="image/*">
+                                                <input name="pictuer" type="file" class="d-none" id="RoomPhoto" >
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
+
+                                <input type="hidden" name="id" value="{{ $item->id }}">
+
                                 <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
-                                <button id="BookingUnConf" class="btn btn-success"  data-dismiss="modal">Add</button>
+                                <button type="submit" id="BookingUnConf" class="btn btn-success" >Add</button>
                             </div>
                         </div>
                     </div>
@@ -324,7 +308,10 @@
                 <!--===========================EndAdd Row========================-->
 
 
-
+                @endforeach
+                @endforeach
+            </tbody>
+        </table>
      <!--=================== Photo Room  modal===========================-->
 
      <div class="modal fade" id="PhotoModal" tabindex="-1" role="dialog"
@@ -357,5 +344,7 @@
      }
        </script>
 
+       
+@include('layouts.footer')
        
 @endsection

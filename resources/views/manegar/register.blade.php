@@ -59,13 +59,21 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="First Name *" value="" name="first_name">
                             </div>
+                            @error('first_name')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Last Name *" value="" name="last_name">
                             </div>
+                            @error('last_name')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
                             <div class="form-group">
                                 <input type="password" class="form-control" placeholder="Password *" value="" name="password">
                             </div>
-                        
+                            @error('password')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
                             <div class="form-group">
                                
                             </div>
@@ -74,12 +82,23 @@
                             <div class="form-group">
                                 <input type="email" class="form-control" placeholder="Your Email *" value="" name="Email">
                             </div>
+                            @error('Email')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
                             <div class="form-group">
                                 <input type="text" minlength="10" maxlength="10"  class="form-control" placeholder="Your Phone *" value="" name="phone_number">
                             </div>
-                
-                            
-                          
+                            @error('phone_number')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
+                            <div class="form-group">
+                                <label for="chooseFile"><span class="form-control">photo certificate</span></label>
+                                
+                                <input id="chooseFile" type="file" class="form-control d-none" placeholder="photo certificate *" value="" name="photo_certificate">
+                            </div>
+                            @error('photo_certificate')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -88,20 +107,9 @@
                     <h3 class="register-heading">Place information</h3>
                     <div class="row register-form">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Place Name *" value="" name="place_name">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Address*" value="" name="address">
-                            </div>
-                            <div class="form-group">
-                                <input list="Region" class="form-control" placeholder="The Region *">
-                                <datalist id="Region">
-                                    <option value="mazza"></option>
-                               </datalist>
-                            </div>
+                
                            
-                        
+                
                         </div>
 
                         <div class="col-md-6">
@@ -109,19 +117,9 @@
                            
                          <div class="form-group">
                            
-                            <div class="form-group">
-                                <input type="number" id="stars"  oninput="starsValidate()" class="form-control" placeholder="stars " value="" name="stars">
-                               
-                            </div>
+            
 
-                            <label class="radio inline"> 
-                                <input type="radio"  value="Hotel" checked="" name="place_type">
-                                <span> Hotel </span> 
-                            </label>
-                            <label class="radio inline"> 
-                                <input type="radio" value="House" name="place_type">
-                                <span>House </span> 
-                            </label>
+
                             
                     </div>
                         </div>

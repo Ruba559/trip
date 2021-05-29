@@ -1,86 +1,82 @@
 @extends('layouts.app')
 
+@section('content_head')
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap.minlogin.css">
+	<link rel="stylesheet" type="text/css" href="lib/util.css">
+	<link rel="stylesheet" type="text/css" href="lib/main.css">
+
+	<style>
+		body{
+    background: -webkit-linear-gradient(left, #5e80a7, #b8ecfa);
+  }
+	</style>
+@endsection
+
 @section('content')
 
-<main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">
-    <div class="flex">
-        <div class="w-full">
-            <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
+<body>
 
-                <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
-                    {{ __('Login') }}
-                </header>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" method="POST" action="{{ route('login') }}">
+					@csrf
+                    <span class="login100-form-title">
+						Sign In
+					</span>
 
-                <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('login') }}">
-                    @csrf
+					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+						<input class="input100 @error('email') border-red-500 @enderror" type="email" name="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+						<span class="focus-input100"></span>
+					</div>
+                    @error('email')
+                    <p class="text-red-500 text-xs italic mt-4">
+                        {{ $message }}
+                    </p>
+                    @enderror
+					<div class="wrap-input100 validate-input" data-validate="Please enter password">
+						<input class="input100 @error('password') border-red-500 @enderror" type="password" name="password" placeholder="Password">
+						<span class="focus-input100"></span>
+					</div>
+                    @error('password')
+                    <p class="text-red-500 text-xs italic mt-4">
+                        {{ $message }}
+                    </p>
+                    @enderror
 
-                    <div class="flex flex-wrap">
-                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
-                            {{ __('E-Mail Address') }}:
-                        </label>
-
-                        <input id="email" type="email"
-                            class="form-input w-full @error('email') border-red-500 @enderror" name="email"
-                            value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                        @error('email')
-                        <p class="text-red-500 text-xs italic mt-4">
-                            {{ $message }}
-                        </p>
-                        @enderror
-                    </div>
-
-                    <div class="flex flex-wrap">
-                        <label for="password" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
-                            {{ __('Password') }}:
-                        </label>
-
-                        <input id="password" type="password"
-                            class="form-input w-full @error('password') border-red-500 @enderror" name="password"
-                            required>
-
-                        @error('password')
-                        <p class="text-red-500 text-xs italic mt-4">
-                            {{ $message }}
-                        </p>
-                        @enderror
-                    </div>
-
-                    <div class="flex items-center">
-                        <label class="inline-flex items-center text-sm text-gray-700" for="remember">
-                            <input type="checkbox" name="remember" id="remember" class="form-checkbox"
-                                {{ old('remember') ? 'checked' : '' }}>
-                            <span class="ml-2">{{ __('Remember Me') }}</span>
-                        </label>
+                 @if(Session::has('message'))
+                     
+            {{Session::get('message')}}
+             
+                           @endif
 
                         @if (Route::has('password.request'))
-                        <a class="text-sm text-blue-500 hover:text-blue-700 whitespace-no-wrap no-underline hover:underline ml-auto"
-                            href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-                        @endif
-                    </div>
+					<div class="text-right p-t-13 p-b-23">
+						<span class="txt1">
+							Forgot
+						</span>
 
-                    <div class="flex flex-wrap">
-                        <button type="submit"
-                        class="w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:py-4">
-                            {{ __('Login') }}
-                        </button>
+						<a href="{{ route('password.request') }}" class="txt2">
+							Password?
+						</a>
+					</div>
+                    @endif
+					<div class="container-login100-form-btn">
+						<button type="submit" class="login100-form-btn">
+							Sign in
+						</button>
+					</div>
 
-                        @if (Route::has('register'))
-                        <p class="w-full text-xs text-center text-gray-700 my-6 sm:text-sm sm:my-8">
-                            {{ __("Don't have an account?") }}
-                            <a class="text-blue-500 hover:text-blue-700 no-underline hover:underline" href="{{ route('register') }}">
-                                {{ __('Register') }}
-                            </a>
-                        </p>
-                        @endif
-                    </div>
-                </form>
+					<div class="flex-col-c p-t-13 p-b-40">
+					
+					
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
-            </section>
-        </div>
-    </div>
-</main>
+</body>
+
 
 @endsection

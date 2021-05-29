@@ -40,12 +40,15 @@
 			font-family: 'ink free';
 		}
 	</style>
+	<link href="lib/footer.css" rel="stylesheet">
 @endsection
 
 
 @section('content')
 
+@include('layouts.header')
 <body style="height: 750px">
+
 	<div class="h-100   text-center bgImg ">
 		<div class="overlay"></div>
 		<header class="topbar p-0 bg-transparent">
@@ -91,16 +94,16 @@
 						   </datalist>
 						   <input type="text" name="check_in" class="border-success d-inline  ml-1 mdate formSr col-12 col-md-2 mb-2 mb-md-0 " placeholder="check in" id="mdate">
 						   <input type="text" name="check_out" class="border-success d-inline  ml-1  mdate formSr col-12 col-md-2 mb-2 mb-md-0" placeholder="check out">
-						   <input type="text" name="adult" class="border-success d-inline  ml-1 mdate formSr col-12 col-md-2 mb-2 mb-md-0 " placeholder="count" id="mdate">
-						   <input type="text" name="room" class="border-success d-inline  ml-1  mdate formSr col-12 col-md-2 mb-2 mb-md-0" placeholder="room">
-						   <div class="col-12 col-md-3 mb-2 mb-md-0 bg-white font-weight-bolder ml-1 pt-2 text-dark" style="border-radius: 0.3rem; border:0.1em solid #21c1d6;font-size:0.75rem ;" data-toggle="modal" data-target="#exampleModal" id="RoomInfo"><span class="font-14"> <span id="RoomCount" > Room</span><br>
-							<i class="fas fa-users"></i><span id="CountAdult"> Guests </span>
+						   <input type="text" name="place_type" class="border-success d-inline  ml-1  mdate formSr col-12 col-md-2 mb-2 mb-md-0" placeholder="place type">
+						
+					
+						
+						   <div class="col-12 col-md-3 mb-2 mb-md-0 bg-white font-weight-bolder ml-1 pt-2 text-dark" style="border-radius: 0.3rem; border:0.1em solid #21c1d6;font-size:0.75rem ;" data-toggle="modal" data-target="#exampleModal" id="RoomInfo"><br>
+							<i class="fas fa-users"></i><span id="guests"> Guests </span>
 						   </span>
 						</div>
 							<div class="col-12 col-md-2"><button class="btn btn-twitter btn-block btn-lg mt-1" type="submit">Search</button></div>
 						</div>
-						<input id="RoomCount">
-						<input id="CountAdult" readonly>
 						
 						
 					</form>
@@ -120,18 +123,16 @@
 													</button>
 												</div>
 												<div class="modal-body bgColorAll">
-													<form class="form-horizontal mt-3">
-														@csrf
+													<div class="form-horizontal mt-3">
+														
 														<div class="oneRoom">
 															<div class="borderForm p-2">
-															  <p class="text-center mb-0 p-2 m-20 d-inline">
-																  <small id="name45" class=" badge-default  form-text  font-14 p-20">Room</small>
-															  </p>
-															   <span onclick="RPRoom()" class="borderInput activbtn cerc"  style="cursor: pointer;">-</span><input id="al" value="1" class="form-control w-50 d-inline m-2 RoomInfo" readonly><span onclick="PlRoom()"  class="borderInput activbtn" style="cursor: pointer;">+</span> 
+															 
+															  
 															    <p class="text-center mb-0 p-2 m-20 d-inline">
 																	<small id="name45" class=" badge-default  form-text  font-14 p-20">Adult</small>
 																</p>
-																<span onclick="RPAdult()" class="borderInput activbtn"  style="cursor: pointer;">-</span><input id="ad" name="adult" value="1" class="form-control w-50 d-inline m-2 RoomInfo"  readonly><span onclick="PlAdult()"  class="borderInput activbtn"  style="cursor: pointer;">+</span>
+																<span onclick="RPAdult()" class="borderInput activbtn"  style="cursor: pointer;">-</span><input id="ad"  value="1" class="form-control w-50 d-inline m-2 RoomInfo"  readonly><span onclick="PlAdult()"  class="borderInput activbtn"  style="cursor: pointer;">+</span>
 																 <p class="text-center mb-0 p-2 m-20 d-inline">
 																	 <small id="name45" class=" badge-default  form-text  font-14 p-20">Child</small>
 																	</p>
@@ -141,31 +142,21 @@
 																	<div id="DivAgeChilde" class="m-1"></div>
 																</div>
 															</div>
+
 															<div class="modal-footer">
 																<span  class="btn headercolor btn-lg  done" id="done" onclick="doneForm()" data-dismiss="modal">Done</span>
-															 </form>
+															</div>
 															</div>
 														</div>
 													</div>
 												  </div>
 												</div>
+												<input id="al" value="1" class="form-control w-50 d-none m-2 RoomInfo" name="adult"  >
+											</form>
 											</div>
 										</center>
 									</div>
-									<!-- =========================footer===================================== -->
-									<footer class="footer bg-light">
-										<div class="container">
-											<div class="row">
-												<div class="col-lg-6 my-auto h-100 text-center text-lg-center">
-													
-													<p class="text-muted small mb-4 mb-lg-0">© Trip's Aid team 2021.</p>
-												</div>
-												<div class="col-lg-6 my-auto h-100 text-center text-lg-right">
-													
-												</div>
-											</div>
-										</div>
-									</footer>
+									@include('layouts.footer')
 								
 						
 				  
@@ -197,9 +188,6 @@
 			</div>
     
           
-	   
-	
-
 	
 	<script>
 		//==================================================//

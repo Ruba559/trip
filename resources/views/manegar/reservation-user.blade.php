@@ -59,13 +59,15 @@ transition: 0.3s;
 
 
 </style>
-
+<link href="lib/footer.css" rel="stylesheet">
 @endsection
 
 
 @section('content')
 
+@include('layouts.header-sm')
 <body>
+   
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -107,21 +109,10 @@ transition: 0.3s;
                 </div>
             
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <div class="card">
-                  
-
-
-
-
                             <!--------------------------Search------------------>
                             <div class="card-body">
                             <div class="mt-5">
@@ -168,23 +159,24 @@ transition: 0.3s;
                                             </thead>
                                             <tbody>
                                                 <!-- row -->
-                                                @foreach ($availables as $available)
-                                        
-                                                         
+                                                @foreach ($availables as $item)
+                                    
+                                                @foreach($item->available as $row)
+                                                
                                                 <tr class="search-items showTr">
                                                    
                                                    
                                                     <td>
-                                                        <span>{{ $row['s_date']}}</span>
+                                                        <span>{{ $row->s_date}}</span>
                                                     </td>
                                                     <td>
-                                                        <span>{{ $row['e_date'] }}</span>
+                                                        <span>{{ $row->e_date }}</span>
                                                     </td>
                                                     <td>
-                                                        <span class="allBill">200</span>
+                                                        <span class="allBill">{{ $row->bill  }}</span>
                                                     </td>
                                                     <td>
-                                                        <span class="Paid">200</span> <i class="fas fa-plus text-info font-20 AddIcon" data-toggle="modal" data-target="#AddMoney"></i>
+                                                        <span class="Paid">{{ $row->paid }}</span> <i class="fas fa-plus text-info font-20 AddIcon" data-toggle="modal" data-target="#AddMoney"></i>
                                                     </td>
                                                     <td>
                                                         <span class="Remaining" ></span>
@@ -199,10 +191,10 @@ transition: 0.3s;
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <span class="BookingDate">05/18/2021</span>
+                                                        <span class="BookingDate">{{ $row->created_at  }}</span>
                                                     </td>
                                                     <td>
-                                                        <span data-toggle="modal" data-target="#Userprofile" style="cursor: pointer;">{{ $row['booking_name'] }}<i class="fas fa-user ml-2 text-info font-20"></i></span>
+                                                        <span data-toggle="modal" data-target="#Userprofile" style="cursor: pointer;">{{ $row->booking_name }}<i class="fas fa-user ml-2 text-info font-20"></i></span>
                                                     </td>
                                                    
                                                     <td class="text-center">
@@ -223,16 +215,12 @@ transition: 0.3s;
                     </div>
                 </div>
             </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
+            
             </div>
             
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
+    
     
              <!--===========================Delete Row========================-->
 
@@ -249,7 +237,7 @@ transition: 0.3s;
                             <p class="font-20 font-weight-bolder text-dark">Are you sure to Delete This Reservation ?</p>
                             <div class="modal-footer">
                                 <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
-                                <a  href="remove_reservation/{{ $available->id }}" id="BookingUnConf" class="btn btn-danger">Delete</a>
+                                <a  href="remove_reservation/{{ $row->id }}" id="BookingUnConf" class="btn btn-danger">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -284,7 +272,7 @@ transition: 0.3s;
                             </div>
                             <div class="modal-footer">
                                 <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
-                                <a href="edit_reservation/{{ $available->id }}" id="BookingUnConf" class="btn btn-info">Confirm Reservation</a>
+                                <a href="edit_reservation/{{ $row->id }}" id="BookingUnConf" class="btn btn-info">Confirm Reservation</a>
                             </div>
                         </div>
                     </div>
@@ -292,7 +280,7 @@ transition: 0.3s;
                 </div>
                 </div>
                 
-        <button class="btn btn-info m-5"> <a href="/room_info" class="text-white">Go to rooms table</a></button>
+      
                 <!--===========================EndEdit Row========================-->
 
               
@@ -346,61 +334,36 @@ transition: 0.3s;
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <form action="adit_bill"  method="POST">
+                    @csrf
                 <div class="modal-body">
                     <div class="card-body text-center">
                         <div class="form-group">
                             <label class="col-md-12"> the amount</label>
                             <div class="col-md-12">
-                                <input type="number" placeholder="" class="form-control form-control-line">
+                                <input type="number" name="paid" placeholder="{{ $row->paid }}" class="form-control form-control-line">
                             </div>
                         </div>
-                       
+                       <input type="hidden" name="id" value="{{ $row->id }}">
                     </div>
                     <div class="modal-footer">
                         <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
-                        <button id="BookingUnConf" class="btn btn-info"  data-dismiss="modal">Add</button>
+                        <button type="submit" id="BookingUnConf" class="btn btn-info">Add</button>
                     </div>
                 </div>
             </div>
+        </form>
             @endforeach
+            @endforeach
+          
         </div>
         </div>
        
                                                   
             </tbody>
         </table>
-<!-- footer -->
-<footer class="site-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12 col-md-6">
-          <h6>About</h6>
-          <p class="text-justify">Our website aims to facilitate remote reservations processes by offering<i class="text-muted"> Users </i> the available rooms at the specified time with the possibility of booking in the right place also. <i class="text-muted"> The owners of hotels and overnight stays </i> can display their properties on the site and thus they can get customers easily</p>
-        </div>
+        <button class="btn btn-info m-5"> <a href="/room_info" class="text-white">Go to rooms table</a></button>
 
-
-        <div class="col-xs-6 col-md-3">
-          <h6>Quick Links</h6>
-          <ul class="footer-links">
-            <li><a href="proIndex2.html">Home</a></li>
-            <li><a href="Login.html">Log in</a></li>
-            <li><a href="user rigister.html">Sign Up</a></li>
-            <li><a href="SM rigister.html">Add Place</a></li>
-          </ul>
-        </div>
-      </div>
-      <hr>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-sm-6 col-xs-12">
-          <p class="copyright-text">@ Trip's Aid team 2021
-          </p>
-        </div>
-
-      </div>
-    </div>
-</footer>
 <!-- ============================================================== -->
 <!-- End footer -->
 <!-- ============================================================== -->
@@ -528,7 +491,7 @@ transition: 0.3s;
             </script>
             
     
-    
+    @include('layouts.footer')
     
 </body>
 

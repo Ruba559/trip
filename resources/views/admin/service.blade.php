@@ -12,13 +12,144 @@
     }
     
 </style>
+<link href="lib/footer.css" rel="stylesheet">
+
+<style>
+
+    .container {
+      max-width: 960px;
+    }
+    .navbar-survival101 {
+      background-color:#2B6DAD;
+    }
+    /* .navbar-survival101 .navbar-brand {
+      margin-right: 2.15rem;
+      padding: 3px 0 0 0;
+      line-height: 36px;
+    } */
+    
+    .navbar-survival101 .navbar-brand img {
+      vertical-align: baseline;
+    }
+    
+    .navbar-expand-lg .navbar-nav .nav-link {
+      color: #fff;
+    }
+    .navbar-expand-lg .navbar-nav .nav-link:hover {
+      color: #fff;
+    }
+    .search-box {
+      position: relative;
+      height: 34px;
+    }
+    .search-box input {
+      border: 0;
+      border-radius: 3px !important;
+      padding-right: 28px;
+      font-size: 15px;
+    }
+    
+    .search-box .input-group-btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 999;
+    }
+    
+    .search-box .input-group-btn button {
+      background-color: transparent;
+      border: 0;
+      padding: 4px 8px;
+      color: rgba(0,0,0,.4);
+      font-size: 20px;
+    }
+    
+    .search-box .input-group-btn button:hover,
+    .search-box .input-group-btn button:active,
+    .search-box .input-group-btn button:focus {
+      color: rgba(0,0,0,.4);
+    }
+    
+    @media (min-width: 992px) {
+      .navbar-expand-lg .navbar-nav .nav-link {
+        padding-right: .7rem;
+        padding-left: .7rem;
+      }
+      
+      .search-box {
+        width: 300px !important;
+      }
+    }
+    
+    .caroulsel {
+      width: 100%;
+      overflow: hidden;
+      padding: 5px 0 5px 5px;
+    }
+    
+    .caroulsel-wrap {
+      white-space: nowrap;
+      font-size: 0;
+    }
+    
+    .caroulsel-wrap a {
+      display: inline-block;
+      width: 134px;
+      height: 92px;
+      background-color: silver;
+      border: #ccc 1px solid;
+      margin-right: 5px;
+    }
+
+   .nav-item:hover{
+     background-color: #377bbe;
+    box-shadow: 0em 0em 0.4em #4c98e4;
+    transition: 0.3s
+   }
+    
+    
+    </style>
 @endsection
 
 
 @section('content')
 
 <body>
-
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-survival101 fixed-top p-0">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand ml-5" href="#">
+            <img src="" width="50" alt="T R I P S A I D">
+          </a>
+         
+      
+          <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav  ">
+              <li class="nav-item p-3">
+                <a class="nav-link" href="/user_table">Users Table</a>
+              </li>
+              <li class="nav-item  p-3">
+                <a class="nav-link" href="/place_table"><span class="hide-menu">Places Table</span></a>
+              </li>
+              <li class="nav-item  p-3">
+                <a class="nav-link" href="#">Service Managers Table</a>
+              </li>
+             
+              <div class="dropdown-menu mailbox dropdown-menu-right scale-up" aria-labelledby="2">
+                
+              </div>
+    
+            </ul>
+          
+          </div>
+     
+          </ul>
+          <a class="nav-link" href="#"><i class="fas fa-sign-out-alt text-white" data-toggle="tooltip" data-placement="bottom" title=" Log out"></i></a> 
+        </div>
+    
+      </nav>
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -26,86 +157,9 @@
         </div>
     </div>
     <div id="main-wrapper">
-        <header class="topbar">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header">
-                    <!-- This is for the sidebar toggle which is visible on mobile only -->
-                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
-                            class="ti-menu ti-close"></i></a>
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
-                    <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon -->
-                      
-                        Trips Aid
-                    </a>
-                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
-                        data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
-                            class="ti-more"></i></a>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav mr-auto float-left">
-                        <!-- This is  -->
-                        <li class="nav-item"> <a
-                                class="nav-link sidebartoggler d-none d-md-block waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                    </ul>
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav float-right">
-                        <!-- ============================================================== -->
-                  
-        </header>
+ 
    
-        <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- User profile -->
-                <div class="user-profile position-relative" style="background-color:rgb(93, 118, 133) ; ">
-                    <!-- User profile image -->
-                    <div class="profile-img"> <img src="../assets/images/users/6.jpg" alt="user" class="w-100 rounded-circle" /> </div>
-                    <!-- User profile text-->
-                    <div class="profile-text pt-1"> 
-                        <sapn class=" UserName w-100 text-white d-block position-relative"role="button" aria-haspopup="true" aria-expanded="true">Rula hamed</span>
-                        
-                    </div>
-                </div>
-                <!-- End User profile text-->
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                   
-                        
-                
-                    <ul id="sidebarnav" class="in">
-                        
-                
-                        
-                        <ul aria-expanded="false" class="collapse first-level in">
-                            <li class="sidebar-item "><a href="overlay-user tables.html" class="sidebar-link "><i class="fas fa-user"></i><span class="hide-menu"> User table </span></a></li>
-                            <li class="sidebar-item active"><a href="overlay-Service managers tables.html" class="sidebar-link active"><i class="fas fa-table"></i> <span class="hide-menu"> Services managers tables </span></a></li>
-                            <li class="sidebar-item"><a href="overlay-Places table.html" class="sidebar-link"><i class=" fas fa-warehouse"></i><span class="hide-menu"> Places tables </span></a></li>
-                            
-                        </ul>
-                
-    </ul>
-                       
-                        
-            <!-- Bottom points-->
-            <div class="sidebar-footer">
-               
-                <a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
-            </div>
-            <!-- End Bottom points-->
-        </aside>
+        
         <div class="page-wrapper">
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
@@ -145,14 +199,9 @@
                                                     <th data-breakpoints="xs sm">Mobile No</th>
                                                     <th data-breakpoints="xs">Email</th>
                                                     <th data-breakpoints="xs">Date of Birth</th>  
-                                                    <th data-breakpoints="all" data-title="Place Name">Place Name</th>
-                                                    <th data-breakpoints="all" data-title="Region">Region</th>
-                                                    <th data-breakpoints="all" data-title="Address">Address</th>
-                                                    <th data-breakpoints="all" data-title="Email">Email</th>
-                                                    <th data-breakpoints="all" data-title="Stars">Stars</th>
-                                                    <th data-breakpoints="all" data-title="PlaceType">PlaceType</th>
-                                                    <th data-breakpoints="all" data-title="certificate">image</th>
-                                                    <th data-breakpoints="all" data-title="IsProven">IsProven</th>
+                                                    <th data-breakpoints="xs" >Certificate</th>
+                                                    <th data-breakpoints="xs">IsProven</th>  
+                                                    <th data-breakpoints="xs">Delete</th>  
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -161,31 +210,26 @@
                                                 <tr data-expanded="false" class="search-items">
                                                    
                                                     @foreach ($servicemanegarsnotproven as $item)
-                                        
-                                    
-                                                    @foreach($item->serviceManegar as $row)
+                    
                                                     
                                                     <td>
                                                         <a href="javascript:void(0)"><img
                                                                 src="../assets/images/users/4.jpg" alt="user" width="40"
-                                                                class="rounded-circle" />{{ $row->first_name }}</a>
+                                                                class="rounded-circle" />{{ $item->first_name }}</a>
                                                     </td>
                                                     
-                                                    <td>{{ $row->last_name }}</td>
-                                                    <td>{{ $row->phone_number }}</td>
-                                                    <td>{{ $row->Email }}</td>
+                                                    <td>{{ $item->last_name }}</td>
+                                                    <td>{{ $item->phone_number }}</td>
+                                                    <td>{{ $item->Email }}</td>
                                                     <td><span class="label label-danger">   1/2/1998</span> </td>
-
-                                                    <td>{{ $row->place_name }}</td>
-                                                    <td>City Center</td>
-                                                    <td>Abo remana</td>
-                                                    <td>ForSeason@gmail.com</td>
-                                                    <td>5</td>
-                                                    <td>Hotel</td>
                                                     <td><button type="button" class="btn btn-light-info" data-toggle="modal"
                                                         data-target="#bs-example-modal-lg">Show the certificate </button></td>
                                                     <td>
-                                                        <button class="btn btn-dark-success" data-toggle="modal" data-target="#exampleModal">Prove</button>
+                                                        <a href="add_proven/{{ $item->id }}" class="btn btn-dark-success"  data-target="#exampleModal">Prove</a>
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="remove_service_manegar/{{ $item->id }}" id="BookingUnConf" class="btn btn-danger">Delete</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -218,15 +262,12 @@
                                         data-toggle-column="first">
                                         <thead>
                                             <tr>
-                                                <th data-breakpoints="xs">ID</th>
                                                 <th>First Name</th>
                                                 <th>Last Name</th>
                                                 <th data-breakpoints="xs sm">Mobile No</th>
                                                 <th data-breakpoints="xs">Email</th>
                                                 <th data-breakpoints="xs">Date of Birth</th> 
-                                                <th data-breakpoints="xs">Place</th>
-                                                <th data-breakpoints="xs">
-                                                   Delete
+                                                <th data-breakpoints="xs">Delete
                                                 </th> 
                                                 
                                             </tr>
@@ -235,7 +276,7 @@
                                             <!--=====Row======-->
                                             @foreach($servicemanegarsproven as $servicemanegarproven)
                                             <tr data-expanded="false" class="search-items">
-                                                <td>1</td>
+                                            
                                                 <td>
                                                     <a href="javascript:void(0)"><img
                                                             src="../assets/images/users/4.jpg" alt="user" width="40"
@@ -246,7 +287,7 @@
                                                 <td>{{ $servicemanegarproven->phone_number }}</td>
                                                 <td>{{ $servicemanegarproven->Email }}</td>
                                                 <td><span class="label label-danger">   1/2/1998</span> </td>
-                                                <td>{{ $servicemanegarproven->Email }}</td>
+                                            
                                             
                                                 <td><a class="text-dark ml-2" ><i class="mdi mdi-delete font-20" data-toggle="modal" data-target="#centermodal"></i></a>
                                                 </td>
@@ -281,7 +322,7 @@
                         </div>
                         </div>
                         @endforeach
-                        @endforeach
+                
                     </tbody>
                 </table>
                 
@@ -325,51 +366,29 @@
                                             <div class="modal-content">
                                                 
                                                 <div class="modal-body p-0">
-                                                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-                                                        <ol class="carousel-indicators">
-                                                            <li data-target="#carouselExampleIndicators2" data-slide-to="0" class=""></li>
-                                                            <li data-target="#carouselExampleIndicators2" data-slide-to="1" class=""></li>
-                                                            <li data-target="#carouselExampleIndicators2" data-slide-to="2" class="active"></li>
-                                                        </ol>
-                                                        <div class="carousel-inner" role="listbox">
-                                                            <div class="carousel-item">
-                                                                <img class="img-fluid" src="../assets/images/big/img3.jpg" alt="First slide">
-                                                            </div>
-                                                            <div class="carousel-item">
-                                                                <img class="img-fluid" src="../assets/images/big/img4.jpg" alt="Second slide">
-                                                            </div>
-                                                            <div class="carousel-item active">
-                                                                <img class="img-fluid" src="../assets/images/big/img5.jpg" alt="Third slide">
-                                                            </div>
-                                                        </div>
-                                                        <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
-                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                            <span class="sr-only">Previous</span>
-                                                        </a>
-                                                        <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next">
-                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                            <span class="sr-only">Next</span>
-                                                        </a>
-                                                    </div>
+                                                   <img src="images/aaa.jpg">
                                                 </div>
                                             </div><!-- /.modal-content -->
                                         </div><!-- /.modal-dialog -->
                                     </div><!-- /.modal -->
     
             </div>
-            <footer class="footer">
-                © 2020 Material Pro Admin by wrappixel.com
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
+           
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
     </div>
 
- 
+    <footer class="site-footer">
+  
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+              <p class="copyright-text">@ Trip's Aid team 2021
+              </p>
+            </div>
+    
+          </div>
+        </div>
+    </footer>
 </body>
 
 

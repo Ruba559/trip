@@ -27,12 +27,16 @@ class Place extends Model
         'updated_at',
 ];
 
-    public function room()
+    public function favorite()
     {
-       return $this->hasMany(Room::class, 'place_id');
+       return $this->hasMany(Favorite::class);
     }
 
     
+    public function room()
+    {
+       return $this->hasMany(Room::class);
+    }
     
 
     public function regoin()
@@ -44,6 +48,11 @@ class Place extends Model
     public function serviceManegar()
     {
         return $this->hasMany(ServiceManegar::class);
+    }
+
+    public function service()
+    {
+       return $this->hasMany(Service::class);
     }
 
 }

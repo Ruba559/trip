@@ -16,23 +16,23 @@ class Room extends Model
     protected $fillable = [
       'count_people'  ,
       'price'    ,
-      'place_id '  ,
-      'description ' ,
+      'place_id'  ,
+      'description' ,
       'is_avalible',
       'created_at',
       'updated_at',
 ];
 
 
-    public function availables()
+    public function available()
     {
-       return $this->hasMany('Available','room_id' );
+       return $this->hasMany(Available::class);
     }
 
 
 
     public function place()
     {
-       return $this->belongsTo(Place::class);
+       return $this->belongsTo(Place::class ,'place_id');
     }
 }

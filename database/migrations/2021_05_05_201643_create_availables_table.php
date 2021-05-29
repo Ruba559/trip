@@ -21,6 +21,8 @@ class CreateAvailablesTable extends Migration
             $table->date('e_date');
             $table->string('booking_name');
             $table->boolean('status');
+            $table->double('bill');
+            $table->double('paid');
             $table->timestamps();
         });
     }

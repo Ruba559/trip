@@ -14,6 +14,7 @@
             width: 15%;
         }
     </style>
+    <link href="lib/footer.css" rel="stylesheet">
 @endsection
 
 
@@ -25,7 +26,7 @@
                 <div class="container-fluid"><a class="navbar-brand" href="#">Trip's aid</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     
                 </div>
-                <div class="w" id="navcol-1"><a class="btn btn-light action-button" role="button" href="#">Log out</a></div>
+                <div class="w" id="navcol-1"><a class="btn btn-light action-button" role="button" href="/logout_admin">Log out</a></div>
             </nav>
             <div class="container hero">
                 <div class="row">
@@ -57,6 +58,19 @@
         </div>
     </div>
    
+    <footer class="site-footer">
+  
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+              <p class="copyright-text">@ Trip's Aid team 2021
+              </p>
+            </div>
+    
+          </div>
+        </div>
+    </footer>
+
 </body>
 
 @endsection

@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Place;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\RegisterRequest;
 use DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -18,28 +20,31 @@ class UserController extends Controller
 
     public function getAccount()
     {
+      
+      
+      $user =   Auth::user();
 
-       
-        return view('profile', ['user' => Auth::user()]);
+         dd($user);
+       // return view('profile', ['user' => Auth::user()]);
+
     }
 
     
     public function index()
     {
-
        
         return view('auth.register');
     }
 
 
-    function create(Request $req)
+    function create(RegisterRequest $req)
     {
               
         $filePath = "";
 
       if ($req->has('picture')) {
 
-           $filePath = uploadImage('images', $req->picture);
+           $filePath = uploadImage($req->picture,'images');
         }
 
             $user= new User;
@@ -52,13 +57,20 @@ class UserController extends Controller
             $user->picture= $filePath;
             $user->birthday=$req->birthday;
     
+            Auth::login($user);
+
              $user->save();
     
              return redirect('/');
      }
 
     
-
+     public function getLogout()
+     {
+         Auth::logout();
+ 
+         return redirect('/');
+     }
 
 
 }

@@ -13,6 +13,8 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
 
+    protected $guard = 'api';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,9 +31,14 @@ class User extends Authenticatable implements JWTSubject
             'is_Admin_S'  
     ];
 
+    public function favorite()
+    {
+       return $this->hasMany(Favorite::class);
+    }
+
     public function available()
     {
-       return $this->hasMany(Available::class , 'user_id');
+       return $this->hasMany(Available::class);
 
     }
 

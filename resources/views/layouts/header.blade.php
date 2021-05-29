@@ -1,144 +1,146 @@
-<!DOCTYPE html>
-<html dir="ltr" lang="en">
-
 <head>
-    <link href="lib/navBar.css" rel="stylesheet">
+  <style>
 
+    .container {
+      max-width: 960px;
+    }
+    .navbar-survival101 {
+      background-color:#2B6DAD;
+    }
+    /* .navbar-survival101 .navbar-brand {
+      margin-right: 2.15rem;
+      padding: 3px 0 0 0;
+      line-height: 36px;
+    } */
+    
+    .navbar-survival101 .navbar-brand img {
+      vertical-align: baseline;
+    }
+    
+    .navbar-expand-lg .navbar-nav .nav-link {
+      color: #fff;
+    }
+    
+    .search-box {
+      position: relative;
+      height: 34px;
+    }
+    .search-box input {
+      border: 0;
+      border-radius: 3px !important;
+      padding-right: 28px;
+      font-size: 15px;
+    }
+    
+    .search-box .input-group-btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 999;
+    }
+    
+    .search-box .input-group-btn button {
+      background-color: transparent;
+      border: 0;
+      padding: 4px 8px;
+      color: rgba(0,0,0,.4);
+      font-size: 20px;
+    }
+    
+    .search-box .input-group-btn button:hover,
+    .search-box .input-group-btn button:active,
+    .search-box .input-group-btn button:focus {
+      color: rgba(0,0,0,.4);
+    }
+    
+    @media (min-width: 992px) {
+      .navbar-expand-lg .navbar-nav .nav-link {
+        padding-right: .7rem;
+        padding-left: .7rem;
+      }
+      
+      .search-box {
+        width: 300px !important;
+      }
+    }
+    
+    .caroulsel {
+      width: 100%;
+      overflow: hidden;
+      padding: 5px 0 5px 5px;
+    }
+    
+    .caroulsel-wrap {
+      white-space: nowrap;
+      font-size: 0;
+    }
+    
+    .caroulsel-wrap a {
+      display: inline-block;
+      width: 134px;
+      height: 92px;
+      background-color: silver;
+      border: #ccc 1px solid;
+      margin-right: 5px;
+    }
+   .bg-Profile{
+     border: 0.15em solid #8ca9c7;
+     background-color: #88a4c0;
+     color: #d0dbe6;
+     font-weight: 600;
+
+   }
+    
+    </style>
+      
 </head>
+ 
+<nav class="navbar navbar-expand-lg navbar-dark navbar-survival101 fixed-top">
+  <div class="container">
+    <a class="navbar-brand ml-5" href="#">
+      <img src="" width="50" alt="T R I P S A I D">
+    </a>
+ <div>
+    <ul class="navbar-nav  float-right">
+    
 
-<body>
-<header class="topbar">
-    <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-        <div class="navbar-header">
-       
-            <a class="navbar-brand" href="index.html">
-                <!-- Logo icon -->
-              
-                Trips Aid
-            </a>
-            <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
-                data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
-                    class="ti-more"></i></a>
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Logo -->
-        <!-- ============================================================== -->
-        <div class="navbar-collapse collapse" id="navbarSupportedContent">
-            <!-- ============================================================== -->
-            <!-- toggle and nav items -->
-            <!-- ============================================================== -->
-            <ul class="navbar-nav mr-auto float-left">
-                <!-- This is  -->
-               
-
+      <li class="nav-item dropdown ml-5">
+          <a class="nav-link dropdown-toggle" href="" id="2"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i
+                  class="fas fa-sign-in-alt"></i>
+              <div class="notify">  </div>
+          </a>
+          <div class="dropdown-menu mailbox dropdown-menu-right scale-up" aria-labelledby="2">
+              <ul class="list-style-none">
+                 
+                  <li>
+                      <div class="message-center position-relative" style="height:auto">
+                          <!-- Message -->
                         
-                <!-- ============================================================== -->
-                <!-- Search -->
-                <!-- ============================================================== -->
-               
-                <!-- ============================================================== -->
-                <!-- Mega Menu -->
-                <!-- ============================================================== -->
-              
-                <!-- ============================================================== -->
-                <!-- End Mega Menu -->
-                <!-- ============================================================== -->
-            </ul>
-            
-            <ul class="navbar-nav float-right">
-<li class="nav-item">
-<a href="overlay-Place Info.html" class="nav-link active"><i class="fas fa-info"></i><span class="hide-menu"> Place Info </span></a>    
-</li>
-<li class="nav-item">
-<a href="overlay-Rooms table.html" class="nav-link "><i class="fas fa-table"></i> <span class="hide-menu"> Rooms Table </span></a>    
-</li>
-<li class="nav-item">
-<a href="overlay-Reservation dates.html" class="nav-link"><i class="fas fa-calendar-alt"></i><span class="hide-menu">Reservation </span></a>  
-</li>
-<li class="nav-item">
-<a href="overlay-Service managers tables.html" class="nav-link"><i class="fas fa-table"></i> <span class="hide-menu"> SM tables </span></a>  
-</li>
-
-<li class="nav-item">
-<a href="overlay-user tables.html" class="nav-link"><i class="fas fa-user"></i><span class="hide-menu"> User table </span></a>
-</li>
-
-<li class="nav-item">
-<a href="overlay-Places table.html" class="nav-link"><i class=" fas fa-warehouse"></i><span class="hide-menu"> Places tables </span></a>    
-</li>
-
-
-                <!-- ============profile========-->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <img alt="user" width="35" class="profile-pic rounded-circle" id="IMGProfile">  <span class="rounded-circle bg-light  pl-2 pr-2 pt-3 pb-3 text-dark font-14" id="profile" >profile</span>
-                    </a>
-                    <div class="dropdown-menu mailbox dropdown-menu-right scale-up">
-                        <ul class="dropdown-user list-style-none">
-                            <li>
-                                <div class="dw-user-box p-3 d-flex">
-                                    <div class="u-img"> <img src="../assets/images/users/1.jpg" alt="user" class="rounded bg-light" width="80"></div>
-                                    <div class="u-text ml-2">
-                                        <h4 class="mb-0">Steave Jobs</h4>
-                                        <p class="text-muted mb-1 font-14">varun@gmail.com</p>
-                                        <a href="proUserProfile.html" class="btn btn-rounded btn-danger btn-sm text-white d-inline-block">View
-                                            Profile</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown mr-5">
-                    <a class="nav-link dropdown-toggle" href="" id="2"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i
-                            class="fas fa-sign-in-alt"></i>
-                        <div class="notify">  </div>
-                    </a>
-                    <div class="dropdown-menu mailbox dropdown-menu-right scale-up" aria-labelledby="2">
-                        <ul class="list-style-none">
-                           
-                            <li>
-                                <div class="message-center position-relative" style="height:150px;">
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)" class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                     <h5><i class=" fas fa-sign-in-alt text-dark-info"></i> Sign in </h5>
-                                    </a>
-                                    <a href="user rigister.html" class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                        <h5><i class="fas fa-registered text-dark-info"></i> Register </h5>
-                                       </a>
-                                       <a href="SM rigister.html" class=" d-flex align-items-center border-bottom px-3 py-2">
-                                        <h5><i class=" fas fa-plus-circle text-dark-info"></i> Insert a place </h5>
-                                       </a>
-                                       </div>
-                                       </li>
-                                
-                        </ul>
-                    </div>
-                </li>
-               
-                  
-           
+                          @if(Session::has('user'))
+                         
+                          <a href="/logout" class="message-item d-flex align-items-center border-bottom px-3 py-2">
+                           <h5><i class=" fas fa-sign-in-alt text-dark-info"></i> Sign out </h5>
+                          </a>
+                          @endif
+                          @if(!Session::has('user'))
+                          <a href="/login" class="message-item d-flex align-items-center border-bottom px-3 py-2">
+                            <h5><i class=" fas fa-sign-in-alt text-dark-info"></i> Sign in </h5>
+                           </a>
+                           @endif
+                          <a href="/register_user" class="message-item d-flex align-items-center border-bottom px-3 py-2">
+                              <h5><i class="fas fa-registered text-dark-info"></i> Register </h5>
+                             </a>
+                             <a href="/register_servicemanegar" class=" d-flex align-items-center border-bottom px-3 py-2">
+                              <h5><i class=" fas fa-plus-circle text-dark-info"></i> Insert a place </h5>
+                             </a>
+                             </div>
+                             </li>
+                      
               </ul>
-            <!-- ============================================================== -->
-            <!-- Right side toggle and nav items -->
-            <!-- ============================================================== -->
           </div>
-          </nav>       
-</header>
-<script>
-    var img = document.getElementById("IMGProfile");
-    var spanDiv = document.getElementById("profile");
-    if(img.src == "")
-    {
-        img.classList.add("d-none");
-    }
-    else if(img.src != "")
-    {
-        spanDiv.classList.add("d-none");
-    }
-    </script>
-</body>
-</html>
+      </li>
+      </ul>
+  </div>
+    
+</nav>

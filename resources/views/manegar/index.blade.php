@@ -17,12 +17,13 @@ wrapper[data-layout=horizontal] .topbar .navbar-collapse[data-navbarbg=skin5], #
 }
 
         </style>
-   
+     <link href="lib/footer.css" rel="stylesheet">
+     
 @endsection
 
 @section('content')
 
-
+@include('layouts.header-sm')
 <body>
     <div class="preloader">
         <div class="lds-ripple">
@@ -34,18 +35,23 @@ wrapper[data-layout=horizontal] .topbar .navbar-collapse[data-navbarbg=skin5], #
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper">
-        @include('layouts.header')
     <header class="masthead text-center text-white">
         <div class="masthead-content">
-            <div class="container"><form action="place_info" method="POST">@csrf
-                @foreach ($places as $place)
-           <h1 class="masthead-heading mb-0">{{ $place->place_name}}</h1> 
-          
+            <div class="container">
+            
+                  
+                      
+                 
+             
+           <h1 class="masthead-heading mb-0">{{ $places->place_name }}</h1> 
+           <form action="place_info" method="POST">@csrf
               <h2 class="masthead-subheading mb-0">&nbsp;</h2><button type="submit" class="btn btn-dark btn-xl rounded-pill mt-5" role="button">Edit place information</button></div>
-              <input type="hidden" name="id" value="{{ $place->id}}">
-              @endforeach
+              <input type="hidden" name="id" value="{{ $places->id }}">
+            
             </form>
+            
         </div>
+        
         <div class="bg-circle-1 bg-circle"></div>
         <div class="bg-circle-2 bg-circle"></div>
         <div class="bg-circle-3 bg-circle"></div>

@@ -1,4 +1,6 @@
-<head>
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+    <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
@@ -26,8 +28,12 @@
     <link href="lib/animation.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-material-datetimepicker.css">
     
-
     
+    <link rel="stylesheet" href="../../../../../Room Result_files/Room Result_files/Team-Boxed.css">
+    <link rel="stylesheet" href="../../../../../Room Result_files/Room Result_files/bootstrap.min.css">
+   
+	<link rel="canonical" href="https://www.wrappixel.com/templates/xtremeadmin/" />
+
 	@yield('content_head')
 </head>
 
@@ -84,6 +90,13 @@
 
 
     <script src="lib/rating-init.js"></script>
+
+
+    <script src="lib/app.init.horizontal.js"></script>
+    <script src="lib/app-style-switcher.horizontal.js"></script>
+
+   
+
 
 </body>
 </html>

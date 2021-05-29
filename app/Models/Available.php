@@ -12,20 +12,19 @@ class Available extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id  '  ,
-        'room_id  '    ,
-        'regoin_id'       ,
-        's_date  ' ,
-        'e_date  ',
+        'user_id'  ,
+        'room_id'    ,
+        's_date' ,
+        'e_date',
         'booking_name' ,
-        'status  '   ,
+        'status'   ,
         'created_at',
         'updated_at',
 ];
 
-    public function rooms()
+    public function room()
     {
-       return $this->belongsTo('Room');
+       return $this->belongsTo(Room::class , 'room_id');
     }
 
     public function scopeActive($query)
@@ -41,7 +40,7 @@ class Available extends Model
 
     public function user()
     {
-       return $this->hasMany(User::class);
+       return $this->belongsTo(User::class , 'user_id');
 
     }
 

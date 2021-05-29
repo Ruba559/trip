@@ -12,12 +12,145 @@
     }
     
 </style>
+<link href="lib/footer.css" rel="stylesheet">
+
+<style>
+
+    .container {
+      max-width: 960px;
+    }
+    .navbar-survival101 {
+      background-color:#2B6DAD;
+    }
+    /* .navbar-survival101 .navbar-brand {
+      margin-right: 2.15rem;
+      padding: 3px 0 0 0;
+      line-height: 36px;
+    } */
+    
+    .navbar-survival101 .navbar-brand img {
+      vertical-align: baseline;
+    }
+    
+    .navbar-expand-lg .navbar-nav .nav-link {
+      color: #fff;
+    }
+    .navbar-expand-lg .navbar-nav .nav-link:hover {
+      color: #fff;
+    }
+    .search-box {
+      position: relative;
+      height: 34px;
+    }
+    .search-box input {
+      border: 0;
+      border-radius: 3px !important;
+      padding-right: 28px;
+      font-size: 15px;
+    }
+    
+    .search-box .input-group-btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 999;
+    }
+    
+    .search-box .input-group-btn button {
+      background-color: transparent;
+      border: 0;
+      padding: 4px 8px;
+      color: rgba(0,0,0,.4);
+      font-size: 20px;
+    }
+    
+    .search-box .input-group-btn button:hover,
+    .search-box .input-group-btn button:active,
+    .search-box .input-group-btn button:focus {
+      color: rgba(0,0,0,.4);
+    }
+    
+    @media (min-width: 992px) {
+      .navbar-expand-lg .navbar-nav .nav-link {
+        padding-right: .7rem;
+        padding-left: .7rem;
+      }
+      
+      .search-box {
+        width: 300px !important;
+      }
+    }
+    
+    .caroulsel {
+      width: 100%;
+      overflow: hidden;
+      padding: 5px 0 5px 5px;
+    }
+    
+    .caroulsel-wrap {
+      white-space: nowrap;
+      font-size: 0;
+    }
+    
+    .caroulsel-wrap a {
+      display: inline-block;
+      width: 134px;
+      height: 92px;
+      background-color: silver;
+      border: #ccc 1px solid;
+      margin-right: 5px;
+    }
+
+   .nav-item:hover{
+     background-color: #377bbe;
+    box-shadow: 0em 0em 0.4em #4c98e4;
+    transition: 0.3s
+   }
+    
+    
+    </style>
 @endsection
 
 
 @section('content')
 <body>
-   
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-survival101 fixed-top p-0">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand ml-5" href="#">
+            <img src="" width="50" alt="T R I P S A I D">
+          </a>
+         
+      
+          <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav  ">
+              <li class="nav-item p-3">
+                <a class="nav-link" href="#">Users Table</a>
+              </li>
+              <li class="nav-item  p-3">
+                <a class="nav-link" href="/place_table"><span class="hide-menu">Places Table</span></a>
+              </li>
+              <li class="nav-item  p-3">
+                <a class="nav-link" href="/service_table">Service Managers Table</a>
+              </li>
+             
+              <div class="dropdown-menu mailbox dropdown-menu-right scale-up" aria-labelledby="2">
+                
+              </div>
+    
+            </ul>
+          
+          </div>
+     
+          </ul>
+          <a class="nav-link" href="#"><i class="fas fa-sign-out-alt text-white" data-toggle="tooltip" data-placement="bottom" title=" Log out"></i></a> 
+        </div>
+    
+      </nav>
+
+
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -28,87 +161,7 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <header class="topbar">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header">
-           
-                    <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon -->
-                      
-                        Trips Aid
-                    </a>
-             
-                    <!-- ============================================================== -->
-                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
-                        data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
-                            class="ti-more"></i></a>
-                </div>
-              
-                <div class="navbar-collapse collapse" id="navbarSupportedContent">
-         
-                    <ul class="navbar-nav mr-auto float-left">
-                        <!-- This is  -->
-                        <li class="nav-item"> <a
-                                class="nav-link sidebartoggler d-none d-md-block waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                  
-                    </ul>
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav float-right">
-                        <!-- ============================================================== -->
-                  
-        </header>
- 
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- User profile -->
-                <div class="user-profile position-relative" style="background-color:rgb(93, 118, 133) ; ">
-                    <!-- User profile image -->
-                    <div class="profile-img"> <img src="../assets/images/users/6.jpg" alt="user" class="w-100 rounded-circle" /> </div>
-                    <!-- User profile text-->
-                    <div class="profile-text pt-1"> 
-                        <sapn class=" UserName w-100 text-white d-block position-relative"role="button" aria-haspopup="true" aria-expanded="true">Markarn Doe</span>
-                        
-                    </div>
-                </div>
-                <!-- End User profile text-->
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                   
-                        
-                
-                    <ul id="sidebarnav" class="in">
-                        
-                
-                        
-                        <ul aria-expanded="false" class="collapse first-level in">
-                            <li class="sidebar-item active"><a href="overlay-user tables.html" class="sidebar-link active"><i class="fas fa-user"></i><span class="hide-menu"> User table </span></a></li>
-                            <li class="sidebar-item"><a href="overlay-Service managers tables.html" class="sidebar-link"><i class="fas fa-table"></i><span class="hide-menu"> Services managers tables </span></a></li>
-                            <li class="sidebar-item"><a href="overlay-Places table.html" class="sidebar-link"><i class=" fas fa-warehouse"></i><span class="hide-menu">Places tables </span></a></li>
-                            
-                        </ul>
-                   
-        
-        <!-- End Bottom points-->
-    </ul>
-                       
-                        
-            <!-- Bottom points-->
-            <div class="sidebar-footer">
-               
-                <a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
-            </div>
-            <!-- End Bottom points-->
-        </aside>
+      
         <div class="page-wrapper">
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
@@ -117,7 +170,7 @@
                 <div class="col-md-5 col-12 align-self-center">
                     <h3 class="text-themecolor mb-0">Users table</h3>
                     <ol class="breadcrumb mb-0 p-0 bg-transparent">
-                        <li class="breadcrumb-item"><a href="/index_admin">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">users table</li>
                     </ol>
                 </div>
@@ -224,22 +277,21 @@
                 @endforeach
             </table>
                 <!--===========================EndDelete Row========================-->
-
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer">
-                © 2021 Trips aid team
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
+     
+              
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-    </div>
+        <footer class="site-footer">
   
-   
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                  <p class="copyright-text">@ Trip's Aid team 2021
+                  </p>
+                </div>
+        
+              </div>
+            </div>
+        </footer>
 </body>
 
 @endsection

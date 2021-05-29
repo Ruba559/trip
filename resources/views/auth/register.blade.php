@@ -54,12 +54,21 @@
                                         <div class="form-group">
                                             <input type="text" class="form-control" placeholder="First Name *" value="" name="first_name">
                                         </div>
+                                        @error('first_name')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                         <div class="form-group">
                                             <input type="text" class="form-control" placeholder="Last Name *" value="" name="last_name">
                                         </div>
+                                        @error('last_name')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                         <div class="form-group">
                                             <input type="password" class="form-control" placeholder="Password *" value="" name="password">
                                         </div>
+                                        @error('password')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                         <div class="form-group">
                                             <input type="password" class="form-control" placeholder="Confirm Password *" value="">
                                         </div>
@@ -71,9 +80,15 @@
                                         <div class="form-group">
                                             <input type="email" class="form-control" placeholder="Your Email *" value="" name="Email">
                                         </div>
+                                        @error('Email')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                         <div class="form-group">
                                             <input type="text" minlength="10" maxlength="10"  class="form-control" placeholder="Your Phone *" value=""  name="phone_number">
                                         </div>
+                                        @error('phone_number')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                         <div class="form-group">
                                             <input type="text" class="mdate form-control "placeholder="date of birth" name="birthday">
                                         </div>
@@ -94,41 +109,6 @@
             </div>
             
             
-
-            <!-- Site footer -->
-    <footer class="site-footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12 col-md-6">
-              <h6>About</h6>
-              <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative  to help the upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
-            </div>
-  
-  
-            <div class="col-xs-6 col-md-3">
-              <h6>Quick Links</h6>
-              <ul class="footer-links">
-                <li><a href="proIndex2.html">Home</a></li>
-                <li><a href="Login.html">Log in</a></li>
-                <li><a href="user rigister.html">Sign Up</a></li>
-                <li><a href="SM rigister.html">Add Place</a></li>
-              </ul>
-            </div>
-          </div>
-          <hr>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 col-sm-6 col-xs-12">
-              <p class="copyright-text">@ Trip's Aid team 2021
-              </p>
-            </div>
-  
-          </div>
-        </div>
-  </footer>
-
-
 
 
   <script>

@@ -2,7 +2,7 @@
 var agH1 = document.getElementById("ChildrenAgeH1");
 var divAgeChld = document.getElementById("DivAgeChilde");
 var numchilde  = document.getElementsByClassName("numChilde");
-    var RoomCnt = document.getElementById('RoomCount');
+ var guests = document.getElementById("guests");
     var ChildeCnt = document.getElementById('CountChilde');
     var AdultCnt = document.getElementById('CountAdult');
     var al = document.getElementById("al").value ;
@@ -108,15 +108,8 @@ var numchilde  = document.getElementsByClassName("numChilde");
 
     function doneForm()
     {
-        if(x >1)
-        {RoomCnt.innerHTML = x + " Rooms";
-        AdultCnt.innerHTML = " Guests " +(a +c) ;
-       }
-       else {
-        RoomCnt.innerHTML = x + " Room";
-        AdultCnt.innerHTML = " Guests " +(a +c) ;
-       }
-       
+     guests.innerHTML = "Guests " + (a + c)  ;
+     AdultCnt.value = (a+ c).toString();
     }
 
     /*--====Add AgeChilde =========-*/

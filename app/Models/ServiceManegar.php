@@ -29,7 +29,7 @@ class ServiceManegar extends Authenticatable
 
 public function place()
 {
-   return $this->belongsTo(Place::class,'service_manegar_id');
+   return $this->belongsTo(Place::class);
 }
 
 }

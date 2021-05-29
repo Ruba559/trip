@@ -22,7 +22,7 @@ class CreateServiceManegarsTable extends Migration
             $table->string('phone_number');
             $table->boolean('is_a_proven');
             $table->string('photo_certificate');
-            $table->string('place_id')->nullable();
+            $table->string('place_id');
             $table->timestamps();
         });
     }

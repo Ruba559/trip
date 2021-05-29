@@ -17,7 +17,7 @@ class CreatePlacesTable extends Migration
             $table->id();
             $table->string('Email')->nullable();
             $table->string('place_name');
-            $table->integer('regoin_id')->nullable();
+            $table->integer('regoin_id');
             $table->integer('stars');
             $table->string('address');
             $table->string('place_type');

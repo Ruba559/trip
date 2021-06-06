@@ -78,9 +78,9 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your Email *" value="" name="Email">
+                                            <input type="email" class="form-control" placeholder="Your Email *" value="" name="email">
                                         </div>
-                                        @error('Email')
+                                        @error('email')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
                                         <div class="form-group">

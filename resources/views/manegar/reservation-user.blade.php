@@ -159,42 +159,43 @@ transition: 0.3s;
                                             </thead>
                                             <tbody>
                                                 <!-- row -->
-                                                @foreach ($availables as $item)
+                                                @foreach ($availables as $item)    
                                     
-                                                @foreach($item->available as $row)
+                                              
                                                 
                                                 <tr class="search-items showTr">
                                                    
                                                    
                                                     <td>
-                                                        <span>{{ $row->s_date}}</span>
+                                                        <span>{{ $item->s_date}}</span>
                                                     </td>
                                                     <td>
-                                                        <span>{{ $row->e_date }}</span>
+                                                        <span>{{ $item->e_date }}</span>
                                                     </td>
                                                     <td>
-                                                        <span class="allBill">{{ $row->bill  }}</span>
+                                                        <span class="allBill">{{ $item->bill  }}</span>
                                                     </td>
                                                     <td>
-                                                        <span class="Paid">{{ $row->paid }}</span> <i class="fas fa-plus text-info font-20 AddIcon" data-toggle="modal" data-target="#AddMoney"></i>
+                                                        <span class="Paid">{{ $item->paid }}</span> <i class="fas fa-plus text-info font-20 AddIcon" data-toggle="modal" data-target="#AddMoney"></i>
                                                     </td>
                                                     <td>
                                                         <span class="Remaining" ></span>
                                                     </td>
                                                     
                                                     <td>
-                                                        @if($row->status == 1) 
+                                                        @if($item->status == 1) 
                                                         <span class="badge  p-1 IsConfirm">Confirm</span>
                                                         @endif
-                                                        @if($row->status == 0) 
+                                                        @if($item->status == 0) 
                                                         <span class="badge  p-1 IsConfirm">Unconfirm</span>
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <span class="BookingDate">{{ $row->created_at  }}</span>
+                                                        <span class="BookingDate">{{ $item->created_at }}</span>
                                                     </td>
+                                                    
                                                     <td>
-                                                        <span data-toggle="modal" data-target="#Userprofile" style="cursor: pointer;">{{ $row->booking_name }}<i class="fas fa-user ml-2 text-info font-20"></i></span>
+                                                        <span data-toggle="modal" data-target="#Userprofile" style="cursor: pointer;">{{ $item->booking_name }}<i class="fas fa-user ml-2 text-info font-20"></i></span>
                                                     </td>
                                                    
                                                     <td class="text-center">
@@ -237,7 +238,7 @@ transition: 0.3s;
                             <p class="font-20 font-weight-bolder text-dark">Are you sure to Delete This Reservation ?</p>
                             <div class="modal-footer">
                                 <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
-                                <a  href="remove_reservation/{{ $row->id }}" id="BookingUnConf" class="btn btn-danger">Delete</a>
+                                <a  href="remove_reservation/{{ $item->id }}" id="BookingUnConf" class="btn btn-danger">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -261,22 +262,23 @@ transition: 0.3s;
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <form  action="edit_reservation" method="POST">@csrf
                         <div class="modal-body">
                             <div class="card-body text-center">
                                 <a class="text-dark" href="#"> <img src="../assets/images/users/1.jpg" alt="user" class="rounded-circle d-inline" width="30">  <h4 class="d-inline">{{ $item->first_name }}  </h4></a>
                            <hr>
-                             <span>{{ $item->Email }} </span><br>
-                             <span>{{ $item->phone_number }} </span>
-
-                               
+                             <span>{{ $user->email }} </span><br>
+                             <span>{{ $user->phone_number }} </span>
+                             <input type="hidden" name="id" value="{{ $item->id }}">
+                             <input type="hidden" name="room_id" value="{{ $item->room_id }}">
                             </div>
                             <div class="modal-footer">
                                 <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
-                                <a href="edit_reservation/{{ $row->id }}" id="BookingUnConf" class="btn btn-info">Confirm Reservation</a>
+                                <button  id="BookingUnConf" class="btn btn-info">Confirm Reservation</button>
                             </div>
                         </div>
                     </div>
-                    
+                </form>
                 </div>
                 </div>
                 
@@ -303,7 +305,7 @@ transition: 0.3s;
                                            
                                         
                                       
-                                            <h3 class="card-title mt-5" style="text-transform: capitalize;">{{ $item->first_name }}</h3>
+                                            <h3 class="card-title mt-5" style="text-transform: capitalize;">{{ $user->first_name }}</h3>
                                         </center>
                                     </div>
                                     <div>
@@ -311,9 +313,9 @@ transition: 0.3s;
                                         <small class="text-muted pt-4 db">user  Profile
                                         </small>
                                     <div class="card-body"> <small class="text-muted">Email address : </small>
-                                        <h6>{{ $item->Email }}</h6> <small class="text-muted pt-4 db">Phone : </small>
-                                        <h6>{{ $item->phone_number }}</h6> 
-                                         <small class="text-muted pt-4 db"> Date of birth :</small><h6> <i class="fa fa-calendar"></i>{{ $item->birthday  }}</h6>
+                                        <h6>{{ $user->email }}</h6> <small class="text-muted pt-4 db">Phone : </small>
+                                        <h6>{{ $user->phone_number }}</h6> 
+                                         <small class="text-muted pt-4 db"> Date of birth :</small><h6> <i class="fa fa-calendar"></i>{{ $user->birthday  }}</h6>
                                         
                                         </div>
                                       
@@ -341,10 +343,11 @@ transition: 0.3s;
                         <div class="form-group">
                             <label class="col-md-12"> the amount</label>
                             <div class="col-md-12">
-                                <input type="number" name="paid" placeholder="{{ $row->paid }}" class="form-control form-control-line">
+                                <input type="number" name="paid" value="{{ $item->paid }}" class="form-control form-control-line">
                             </div>
                         </div>
-                       <input type="hidden" name="id" value="{{ $row->id }}">
+                       <input type="hidden" name="id" value="{{ $item->id }}">
+                       <input type="hidden" name="room_id" value="{{ $item->room_id }}">
                     </div>
                     <div class="modal-footer">
                         <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
@@ -354,7 +357,7 @@ transition: 0.3s;
             </div>
         </form>
             @endforeach
-            @endforeach
+            
           
         </div>
         </div>

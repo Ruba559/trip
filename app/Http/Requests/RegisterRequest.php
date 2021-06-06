@@ -25,10 +25,10 @@ class RegisterRequest extends FormRequest
     {
         return [
         
-            'first_name' => 'required|string|max:20',
-            'last_name' => 'required|string|max:20',
-            'phone_number' =>'required|max:20|unique:users,phone_number,'.$this -> id,
-            'Email'  => 'required|email|unique:users,Email,'.$this -> id,
+            'first_name' => 'required_without:id|string|max:30',
+            'last_name' => 'required_without:id|string|max:20',
+            'phone_number' =>'required_without:id|max:20|unique:users,phone_number,'.$this -> id,
+            'email'  => 'required_without:id|email|unique:users,email,'.$this -> id,
             'password'   => 'required_without:id'
         ];
     }
@@ -39,8 +39,8 @@ class RegisterRequest extends FormRequest
             'required' => 'This field is required',
             'unique' => 'This email is already in use',
             'phone_number.unique' => 'This phone number is already in use',
-            'first_name.string' => 'You cannot enter more than 20 characters',
-            'last_name.string' => 'You cannot enter more than 20 characters',
+            'first_name.max' => 'You cannot enter more than 20 characters',
+            'last_name.max' => 'You cannot enter more than 20 characters',
         
         ];
     }

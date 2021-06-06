@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoomRequest extends FormRequest
+class editRoomRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,23 +24,11 @@ class RoomRequest extends FormRequest
     public function rules()
     {
         return [
-        
-            'count_people' => 'required',
-            'price' => 'required',
             
+            'count_people' => 'required_without:id',
+            'price' => 'required_without:id',
+            'pictuer' => 'required_without:id',
         
         ];
     }
-
-         public function messages()
-    {
-          return [
-              
-            'required.price' => 'This field price is required',
-            'required.count_people' => 'This field count people is required',
-           
-        
-        ];
-    } 
-    
 }

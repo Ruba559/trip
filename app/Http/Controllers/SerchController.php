@@ -51,28 +51,30 @@ class SerchController extends Controller
                          'description',
                          'is_avalible',
                          'place_id',
-                         );
+                         )->paginate(2);
                         }])->where('place_type' , $place_type )->get();
 
                         $place_ids = $place->pluck('id')->toArray();
+                         
                 }
           }
 
-        
-          
-         $service = Service::whereIn('place_id' , $place_ids)
-         ->get();
+           // $service = Place::with('service')->whereIn('id' , $place_ids )->get();
 
-         $photo = PlacePicture::whereIn('place_id' , $place_ids)
-         ->get();
+            $service = Service::whereIn('place_id' , $place_ids)->where('place_room' , 'place')
+            ->get();
 
 
-         $services_f = Service::get();
+          $photo = PlacePicture::whereIn('place_id' , $place_ids)
+          ->get();
 
-         $favorite = Place::with('favorite')->get();
 
-         return view('/hotels' , [ 'places' => $place , 'services'=> $service , 'photos' => $photo , 
-         'services_f' => $services_f , 'favorites' => $favorite]);   
+          $services_f = Service::get();
+
+          $favorite = Place::with('favorite')->get();
+
+          return view('/hotels' , [ 'places' => $place , 'services'=> $service , 'photos' => $photo , 
+          'services_f' => $services_f , 'favorites' => $favorite]);   
  
     }
     
@@ -80,42 +82,26 @@ class SerchController extends Controller
     function showRoom(Request $request)
     { 
 
+        $id =  Place::where('id' , $request->id)->get()->pluck('id')->toArray();
 
-     $room =Place::with(['room'=> function($query){
-          $query->select(
-           'id',
-          'count_people',
-          'price',
-          'description',
-          'is_avalible',
-          'place_id',
-          )->where('is_avalible' , '1');
-         }])->where('id', $request->id )->get();
+        $place =  Place::where('id' , $request->id)->first();
 
-       //  $place_ids = $place->pluck('id')->toArray();
-     
-         return view('rooms',['rooms' => $room ]);   
+        $room = Room::where('place_id' , $id)->get();
+
+        $service = Service::where('place_id' , $id)->where('place_room' , 'room')->get();
+      
+         return view('rooms',['rooms' => $room , 'places' => $place , 'services' => $service]);   
  
     }
 
     function selectRoom(Request $request)
     { 
 
-     $id =+ '1';
+     $room_select = Room::where('id' ,  $request->id)->first();
 
-     $room_select =Place::with(['room'=> function($query){
-          $query->select(
-           'id',
-          'count_people',
-          'price',
-          'description',
-          'is_avalible',
-          'place_id',
-          )->where('id', $request->id);
-         }])->first();
-return $room_select;
+   //  $place_select = $room->place;
 
-         return view('rooms',['rooms_select' => $room_select ]);   
+         return view('rooms', ['rooms_select' => $room_select] );   
  
     }
 
@@ -282,10 +268,10 @@ return $room_select;
     }
 
 
-    function showFavorite(Request $request , $id)
+    function showFavorite(Request $request)
     { 
 
-     $place_ids = Favorite::where('place_id' , $id )->get()->pluck('place_id')->toArray();
+     $place_ids = Favorite::where('place_id' , $request->id )->get()->pluck('place_id')->toArray();
 
      $place =Place::with(['room'=> function($query){
           $query->select(

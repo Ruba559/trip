@@ -9,7 +9,9 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use App\Models\ServiceManegar;
 use App\Models\Place;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 
 class LoginController extends Controller
 {
@@ -61,7 +63,7 @@ class LoginController extends Controller
              return view('admin.index');
          }
  
-         if (Auth::guard('serviceManegar')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+         if (Auth::guard('serviceManegar')->attempt(['email' => $request->email, 'is_a_proven' => '1' ,'password' => $request->password], $request->get('remember'))) {
            
             $id_manegar = ServiceManegar::find( auth('serviceManegar')->user()->id);
 
@@ -73,7 +75,8 @@ class LoginController extends Controller
          }
  
          if (Auth::guard('api')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-            $request->session()->put('user');
+          $user = User::where('email', $request->email)->first();
+          Auth::login($user);
             return redirect()->intended('/');
          }
          else {

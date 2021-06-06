@@ -87,15 +87,11 @@
 
                   <div class="overlay"></div>
                  
-                  @foreach ($rooms as $item)
-
-                  @foreach($item->room as $row)
-
                  <div class="container">
                       <div class="row" >
                           <div class="col-md-10 col-lg-8 mx-auto">
                               <div class="site-heading">
-                                  <h1 class="text-white" style="text-shadow: 0.05em 0.08em 0.1em #272626;">{{ $item->place_name }}</h1>
+                                  <h1 class="text-white" style="text-shadow: 0.05em 0.08em 0.1em #272626;">{{ $places->place_name }}</h1>
                                 
                               </div>
                           </div>
@@ -151,33 +147,27 @@
                                       </div>
                           </div>
                           <!--------====================place Info tab===========-->
+
                           <div class="tab-pane fade pl-4" id="pill2">
-                              <div class="float-left col-12 col-md-4"> <i class="ti-location-pin text-dark-success"></i><span class="subheading d-inline" id="Location">{{ $item->address }}</span>
-                                  <br><i class="mr-2 mdi mdi-email font-20 text-dark-success"></i><span class="subheading d-inline" id="stars">{{ $item->Email }}</span>
+                              <div class="float-left col-12 col-md-4"> <i class="ti-location-pin text-dark-success"></i><span class="subheading d-inline" id="Location">{{ $places->address }}</span>
+                                  <br><i class="mr-2 mdi mdi-email font-20 text-dark-success"></i><span class="subheading d-inline" id="stars">{{ $places->Email }} </span>
                               </div>
                                   <div class="float-left col-12 col-md-4 ">
-                                   <i class="fas fa-star text-dark-success"></i> <span class="subheading d-inline" id="stars">{{ $item->stars }} stars</span><span class="subheading">
+                                   <i class="fas fa-star text-dark-success"></i> <span class="subheading d-inline" id="stars">{{ $places->stars }}</span><span class="subheading">
                                        <br><i class="fas fa-heart text-dark-success"></i><span id="likes"> 5 </span> Likes <span id="CountRatng"> 152 </span> rating pepoele</span>
                                       </div>
                              <!--------====================place Services tab===========-->
                           </div>
                           <div class="tab-pane fade" id="pill3">
                           <div class="float-left col-12 col-md-4">
-                              <span class="PService "><span class="nService">Swimming pool</span> : <span class="PriceServise">500</span><i class="ti-money text-dark-success"></i></span>
+                              @foreach($services as $service)
+                                  
+                             
+                              <span class="PService "><span class="nService">{{ $service->service_name }}</span> : <span class="PriceServise">{{ $service->price }}</span><i class="ti-money text-dark-success"></i></span>
                               <br>
-                              <span class="PService "><span class="nService">Resturant</span> : <span class="PriceServise">-</span><i class="ti-money text-dark-success"></i></span>
-                              <br>
-                              <span class="PService"><span class="nService">Swimming pool</span> : <span class="PriceServise">500</span><i class="ti-money text-dark-success"></i></span>
-                              <br>
-                              <span class="PService"><span class="nService">Resturant</span> : <span class="PriceServise">-</span><i class="ti-money text-dark-success"></i></span>
+                              @endforeach
                           </div>
-                          <div class="float-left col-12 col-md-4" >
-                              <span class="PService "><span class="nService">in one Room air-conditioning</span> : <span class="PriceServise">-</span><i class="ti-money text-dark-success"></i></span>
-                              <br>
-                              <span class="PService"><span class="nService">Central air-conditioning</span> : <span class="PriceServise">-</span><i class="ti-money text-dark-success"></i></span>
-                              <br>
-                              <span class="PService"><span class="nService">clothes Washer</span> : <span class="PriceServise">50</span><i class="ti-money text-dark-success"></i></span>
-                          </div>   
+                         
                           </div>
                         </div><!-- /.card-body -->
                       </div><!-- /.card -->
@@ -193,6 +183,8 @@
                        
                            
                         
+                  @foreach ($rooms as $row)
+
                
                           <div class="col-md-6 col-lg-4 item">
                               <div class="box">
@@ -211,7 +203,7 @@
                                 </div>
                           </div>
                           @endforeach
-                          @endforeach
+                        
                       
                           
                   </div>
@@ -245,9 +237,9 @@
                                <h1>Confirm reservation</h1>
                                <hr>
                         <p class="text-dark">The reservation is recorded in the name of the current account .... At least half of the amount must be paid before the lapse of 24 hours since the confirmation of the reservation in order for the reservation to be confirmed</p>
-                        <span><strong class="text-dark font-italic"> </span>the account :</strong> </span><span>5584-5874-963</span><br>
+                        <span><strong class="text-dark font-italic"> </span>the account : </strong> </span><span>5584-5874-963</span><br>
                         <p><strong class="text-dark font-italic"> bill :</strong> <span id="bill">0</span> $</p>
-                        <p><strong class="text-dark font-italic"> number of room :</strong> <span id="NOfRoomSpan">0</span></p>
+                        <p><strong class="text-dark font-italic"> number of room : </strong> <span id="NOfRoomSpan">0</span></p>
                         <p><strong class="text-dark font-italic"> for any problem please contact with us</strong></p>
                         <span> four season.25@gmail.com</span>
                         <div class="alert alert-danger mt-3" role="alert">

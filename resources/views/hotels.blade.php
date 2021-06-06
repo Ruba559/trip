@@ -98,14 +98,19 @@
                             Favorite
                           </a>
                           <div class="dropdown-menu dropdownDiv" aria-labelledby="navbarDropdownFavorit">
+                            <form action="show_favorite" method="POST">@csrf
                             @foreach ($favorites as $item)
                                         
-                                    
+                           
                             @foreach($item->favorite as $row)
                            
-                            <a class="dropdown-item" href="/show_favorite/{{ $item->id }}">{{ $item->place_name }}</a>
+                            <button type="submit" class="dropdown-item">{{ $item->place_name }}</button>
+                           
                             @endforeach
+                            <input type="hidden" name="id" value="{{ $item->id }}">
                             @endforeach
+                            
+                            </form>
                          </div>
                       </li>
                       <li class="nav-item dropdown">
@@ -253,16 +258,15 @@
             <li data-target="#main-slider" data-slide-to="3" class=""></li>
            
           </ol>
+        </div></div> </div>
         
-        </div></div></div>
-
+        
         @foreach ($places as $item)
                                         
                                     
-         @foreach($item->room as $row)
-         
-            
-       
+        @foreach($item->room as $row)
+    
+        
                                                <div class="col-lg-8 col-md-9" id="slimtest1">
                                                 <div>
                                                   <div class="item__name item__name--link"><h3 class="m-0" itemprop="name"><span class="item-link name__copytext" title="Crowne Plaza Dubai Marina" dir="ltr" data-qa="item-name">{{ $item->place_name }}</span></h3><div class="quick-info"><div class="stars-wrp" itemprop="starRating" itemtype="https://schema.org/Rating" itemscope="true"><meta itemprop="ratingValue" content="5"><span class="icon-ic star"><svg xmlns="http://www.w3.org/2000/svg" focusable="false" tabindex="-1" width="12" height="12" viewBox="0 0 12 12"><path class="svg-color--primary" fill="#F6AB3F" d="M11.988 5.21a.667.667 0 00-.545-.534l-3.604-.6L6.63.455a.666.666 0 00-1.262.001L4.16 4.076l-3.603.6a.667.667 0 00-.233 1.228L3.2 7.63l-1.165 3.493a.67.67 0 00.25.758.672.672 0 00.798-.026L6 9.52l2.917 2.333a.66.66 0 00.796.027.665.665 0 00.252-.758L8.8 7.63l2.876-1.725a.667.667 0 00.312-.696z"></path></svg></span><span class="icon-ic star"><svg xmlns="http://www.w3.org/2000/svg" focusable="false" tabindex="-1" width="12" height="12" viewBox="0 0 12 12"><path class="svg-color--primary" fill="#F6AB3F" d="M11.988 5.21a.667.667 0 00-.545-.534l-3.604-.6L6.63.455a.666.666 0 00-1.262.001L4.16 4.076l-3.603.6a.667.667 0 00-.233 1.228L3.2 7.63l-1.165 3.493a.67.67 0 00.25.758.672.672 0 00.798-.026L6 9.52l2.917 2.333a.66.66 0 00.796.027.665.665 0 00.252-.758L8.8 7.63l2.876-1.725a.667.667 0 00.312-.696z"></path></svg></span><span class="icon-ic star"><svg xmlns="http://www.w3.org/2000/svg" focusable="false" tabindex="-1" width="12" height="12" viewBox="0 0 12 12"><path class="svg-color--primary" fill="#F6AB3F" d="M11.988 5.21a.667.667 0 00-.545-.534l-3.604-.6L6.63.455a.666.666 0 00-1.262.001L4.16 4.076l-3.603.6a.667.667 0 00-.233 1.228L3.2 7.63l-1.165 3.493a.67.67 0 00.25.758.672.672 0 00.798-.026L6 9.52l2.917 2.333a.66.66 0 00.796.027.665.665 0 00.252-.758L8.8 7.63l2.876-1.725a.667.667 0 00.312-.696z"></path></svg></span><span class="icon-ic star"><svg xmlns="http://www.w3.org/2000/svg" focusable="false" tabindex="-1" width="12" height="12" viewBox="0 0 12 12"><path class="svg-color--primary" fill="#F6AB3F" d="M11.988 5.21a.667.667 0 00-.545-.534l-3.604-.6L6.63.455a.666.666 0 00-1.262.001L4.16 4.076l-3.603.6a.667.667 0 00-.233 1.228L3.2 7.63l-1.165 3.493a.67.67 0 00.25.758.672.672 0 00.798-.026L6 9.52l2.917 2.333a.66.66 0 00.796.027.665.665 0 00.252-.758L8.8 7.63l2.876-1.725a.667.667 0 00.312-.696z"></path></svg></span><span class="icon-ic star"><svg xmlns="http://www.w3.org/2000/svg" focusable="false" tabindex="-1" width="12" height="12" viewBox="0 0 12 12"><path class="svg-color--primary" fill="#F6AB3F" d="M11.988 5.21a.667.667 0 00-.545-.534l-3.604-.6L6.63.455a.666.666 0 00-1.262.001L4.16 4.076l-3.603.6a.667.667 0 00-.233 1.228L3.2 7.63l-1.165 3.493a.67.67 0 00.25.758.672.672 0 00.798-.026L6 9.52l2.917 2.333a.66.66 0 00.796.027.665.665 0 00.252-.758L8.8 7.63l2.876-1.725a.667.667 0 00.312-.696z"></path></svg></span></div>
@@ -290,12 +294,12 @@
                                        <div class=" btn divFav btn-outline-danger"> <button type="submit" class="LableChckboxFav"   for="FavPlce" style="cursor: pointer; " >Add to Favorite</button> <i class='fas fa-heart FavIcon'></i> </div><input type="checkbox" name="favChekbox" id="FavPlce" class="d-none" >
                                        <input type="hidden" value="{{ $item->id }}" name="id">
                                       </form>
-                                       <form action="rooms" class="btn " method="POST">
-                                          @csrf
-                                
-                                <input class="btn divFav btn-outline-info p-2" type="submit" value="View Available Rooms " >
-                                <input type="hidden" value="{{ $item->id }}" name="id">
-                                        </form>
+                                      <form action="rooms" class="btn " method="POST">
+                                        @csrf
+                              
+                                   <input class="btn divFav btn-outline-info p-2" type="submit" value="View Available Rooms " >
+                                    <input type="hidden" value="{{ $item->id }}" name="id">
+                                      </form>
   
                                       </div> 
                                        <div class="card mb-0 dropdownDiv borderService">
@@ -306,31 +310,36 @@
                                                   </a>
                                               </h5>
                                           </div>
+                                        
                                           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion" >
                                               <div class="card-body text-center">
                                               <div class=" dropdownDiv" aria-labelledby="navbarDropdownService">
-                                                @foreach ($services as $service)
-                                                  
+                                                
+                                                @foreach ($services as $row)
+                                        
+                                
+                                               
                             <div class=" float-left d-inline" style="width: 40%; margin-left: 4%;">
-                              <p><span  class="mr-2">  {{ $service->service_name }}  </span>  : <span>{{ $service->price }}</span> <i class="fas fa-dollar-sign"></i></p>
+                              <p><span  class="mr-2">  {{ $row->service_name }}  </span>  : <span>{{ $row->price }}</span> <i class="fas fa-dollar-sign"></i></p>
                         
                           </div>
                           @endforeach
+                        
                           </div>
                                               </div>
                                           </div>
                                       </div>
         
                                     </div>
-                                  
+                                    @endforeach
+                                          @endforeach
                                   
                                   </div>
                                     </div>
                                   
                     </div>
                 </div></div>
-                                    @endforeach
-                                    @endforeach
+                                   
                                        <!-----------------------End Row----------------------------->
        
                             

@@ -20,15 +20,36 @@ class UserController extends Controller
 
     public function getAccount()
     {
-      
-      
-      $user =   Auth::user();
-
-         dd($user);
-       // return view('profile', ['user' => Auth::user()]);
+         
+     return view('profile', ['user' => Auth::user()]);
 
     }
 
+
+    public function updateProfile(RegisterRequest $request)
+    {
+        $filePath = "";
+
+        if ($request->has('picture')) {
+  
+             $filePath = uploadImage($request->picture ,'images');
+          }
+
+        $user = User::find($request->id);
+
+        $user->first_name  = $request->first_name ;
+        $user->last_name  = $request->last_name ;
+        $user->email  = $request->email ;
+        $user->password  = Hash::make( $request->password);
+        $user->phone_number  = $request->phone_number;
+        $user->picture  = $filePath;
+
+        $user->update();
+      
+
+       return redirect('/');
+
+    }
     
     public function index()
     {
@@ -37,27 +58,25 @@ class UserController extends Controller
     }
 
 
-    function create(RegisterRequest $req)
+    function create(RegisterRequest $request)
     {
               
         $filePath = "";
 
-      if ($req->has('picture')) {
+      if ($request->has('picture')) {
 
-           $filePath = uploadImage($req->picture,'images');
+           $filePath = uploadImage($request->picture,'images');
         }
 
             $user= new User;
     
-            $user->first_name=$req->first_name;
-            $user->last_name=$req->last_name;
-            $user->Email=$req->Email;
-            $user->password=Hash::make( $req->password);
-            $user->phone_number=$req->phone_number;
+            $user->first_name=$request->first_name;
+            $user->last_name=$request->last_name;
+            $user->email=$request->email;
+            $user->password=Hash::make( $request->password);
+            $user->phone_number=$request->phone_number;
             $user->picture= $filePath;
-            $user->birthday=$req->birthday;
-    
-            Auth::login($user);
+            $user->birthday=$request->birthday;
 
              $user->save();
     
@@ -65,6 +84,9 @@ class UserController extends Controller
      }
 
     
+    
+
+
      public function getLogout()
      {
          Auth::logout();

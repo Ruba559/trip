@@ -60,7 +60,7 @@ background: rgb(75, 79, 105);
             <div class="col-md-5 col-12 align-self-center">
                 <h3 class="text-themecolor mb-0">Profile</h3>
                 <ol class="breadcrumb mb-0 p-0 bg-transparent">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active">Profile</li>
                 </ol>
             </div>
@@ -79,20 +79,15 @@ background: rgb(75, 79, 105);
                         <div class="card-body p-0">
                            
                             <center class="mt-4">
-                                <a class="image-popup-no-margins mt-3" href="../assets/images/users/5.jpg" style="position: relative; top: 1rem;"> <img src="../assets/images/users/5.jpg" class="rounded-circle" width="150"   style="cursor: pointer;"/> </a>   
-                                <div class="col-1 " style="z-index: 4; position: relative; top: -1rem; left: 1rem;">
-                                    <label for="choosImg">
-                                    <i class="fas fa-camera font-22 bg-info p-2 text-white" style="border-radius: 2rem ;cursor: pointer;"></i>
-                                </label></div>
-                            
-                            <input type="file" class="d-none" id="choosImg"  accept="image/*">
-                                <h3 class="card-title " style="text-transform: capitalize;"> smith gofer</h3>
+                                <a class="image-popup-no-margins mt-3" href="../assets/images/users/5.jpg" style="position: relative; top: 1rem;"> <img src="{{ asset($user->picture) }}" class="rounded-circle" width="150"   style="cursor: pointer;"/> </a>   
+                              
+                                <h3 class="card-title " style="text-transform: capitalize;">{{ $user->first_name  }}</h3>
                             </center>
                         </div>
                         <div>
                             <hr> </div>
                         <div class="card-body"> <small class="text-muted">Email address : </small>
-                            <h6>{{ $user->Email }}</h6> <small class="text-muted pt-4 db">Phone : </small>
+                            <h6>{{ $user->email }}</h6> <small class="text-muted pt-4 db">Phone : </small>
                             <h6>{{ $user->phone_number }}</h6> 
                              <small class="text-muted pt-4 db"> Date of birth :</small><h6> <i class="fa fa-calendar"></i> {{ $user->birthday }}</h6>
                              <small class="text-muted pt-4 db">user  Profile
@@ -112,25 +107,42 @@ background: rgb(75, 79, 105);
                         <div class="tab-content" id="pills-tabContent">
                             
                                 <div class="card-body">
-                                    <form class="form-material">
+                                    <form action="update_profile" method="POST" class="form-material"  enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="col-1 " style="z-index: 4; position: relative; top: -1rem; left: 1rem;">
+                                            <label for="choosImg">
+                                            <i class="fas fa-camera font-22 bg-info p-2 text-white" style="border-radius: 2rem ;cursor: pointer;"></i>
+                                        </label></div>
+                                    
+                                    <input type="file" name="picture" class="d-none" id="choosImg"  accept="image/*">
                                         <div class="form-group">
                                             <label class="col-md-12">First Name</label>
                                             <div class="col-md-12">
-                                                <input type="text" placeholder="Smith" class="form-control form-control-line">
+                                                <input type="text" value="{{ $user->first_name }}" name="first_name" class="form-control form-control-line">
                                             </div>
                                         </div>
+                                        @error('first_name')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                         <div class="form-group">
                                             <label class="col-md-12">Last Name</label>
                                             <div class="col-md-12">
-                                                <input type="text" placeholder="Gover" class="form-control form-control-line">
+                                                <input type="text" value="{{ $user->last_name }}" name="last_name" class="form-control form-control-line">
                                             </div>
+
                                         </div>
+                                        @error('last_name')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                         <div class="form-group">
                                             <label for="example-email" class="col-md-12">Email</label>
                                             <div class="col-md-12">
-                                                <input type="email" placeholder="johnathan@Gmail.com" class="form-control form-control-line" name="example-email" id="example-email">
+                                                <input type="email" value="{{ $user->email }}" name="email" class="form-control form-control-line" name="example-email" id="example-email">
                                             </div>
                                         </div>
+                                        @error('email')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                         <div class="form-group" id="HideDiv">
                                             <label class="col-md-12"> Password</label>
                                             <div class="col-md-12">
@@ -140,7 +152,7 @@ background: rgb(75, 79, 105);
                                         <div class="form-group d-none" id="ChngOldPs">
                                             <label class="col-md-12"> New Password</label>
                                             <div class="col-md-12">
-                                                <input type="password" id="InputoldPassword" value="" class="form-control form-control-line">
+                                                <input type="password" name="password" id="InputoldPassword" value="" class="form-control form-control-line">
                                             </div>
                                         </div>
                                         
@@ -153,9 +165,10 @@ background: rgb(75, 79, 105);
                                         <div class="form-group">
                                             <label class="col-md-12">Phone No</label>
                                             <div class="col-md-12">
-                                                <input type="text" placeholder="095 456 1457" class="form-control form-control-line">
+                                                <input type="text" name="phone_number" value="{{ $user->phone_number }}" class="form-control form-control-line">
                                             </div>
                                         </div>
+                                        <input type="hidden" name="id" value="{{ $user->id }}">
                                         <div class="form-group"> <div class="col-sm-12"></div>
                                         <div class="form-group">
                                             <div class="col-sm-12">

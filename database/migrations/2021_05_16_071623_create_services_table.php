@@ -17,6 +17,7 @@ class CreateServicesTable extends Migration
             $table->id();
             $table->integer('place_id');
             $table->string('service_name');
+            $table->string('place_room');
             $table->double('price');
             $table->timestamps();
         });

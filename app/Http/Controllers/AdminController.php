@@ -50,13 +50,15 @@ class AdminController extends Controller
         return redirect('place_table');
     }
 
+
     function removeUser($id)
     {
-         
+        
         User::destroy($id);
 
         return redirect('user_table');
     }
+
 
     function serviceTable()
     { 

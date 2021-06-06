@@ -16,6 +16,8 @@ class Available extends Model
         'room_id'    ,
         's_date' ,
         'e_date',
+        'bill',
+         'paid',
         'booking_name' ,
         'status'   ,
         'created_at',

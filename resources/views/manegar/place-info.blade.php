@@ -53,10 +53,8 @@ background: rgb(75, 79, 105);
 
 @section('content')
 
-@include('layouts.header-sm')
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
+@include('layouts.header-sm')\
+
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -64,18 +62,8 @@ background: rgb(75, 79, 105);
         </div>
     </div>
     
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <div id="main-wrapper">
-       <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-     
-    
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 col-12 align-self-center">
                     <h3 class="text-themecolor mb-0">Place info</h3>
@@ -86,16 +74,8 @@ background: rgb(75, 79, 105);
                 </div>
             
             </div>
-        <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
+            
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                
                 <div class="card">
                     <div class="card-body">
                         <h1 class="card-title text-info  mb-5 Plcae-name">{{ $places->place_name }}</h1>
@@ -112,13 +92,13 @@ background: rgb(75, 79, 105);
                                 
                                 <label for="inputEmail3" class="col-md-3 text-right control-label col-form-label"><i class="icon-location-pin text-info"></i> Addriss</label>
                                 <div class="col-md-9 border-left pb-2 pt-2">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="{{ $places->address }}" name="address">
+                                    <input type="text" class="form-control" id="inputEmail3" value="{{ $places->address }}" name="address">
                                 </div>
                             </div>
                             <div class="form-group row align-items-center mb-0">
                                 <label for="inputEmail3" class="col-md-3 text-right control-label col-form-label"><i class=" mdi mdi-email-outline text-info"></i> Email</label>
                                 <div class="col-md-9 border-left pb-2 pt-2">
-                                    <input type="email" class="form-control" id="inputEmail3" placeholder="{{ $places->Email }}" name="Email">
+                                    <input type="email" class="form-control" id="inputEmail3" value="{{ $places->Email }}" name="Email">
                                 </div>
                             </div>
                             <div class="form-group row align-items-center mb-0">
@@ -131,7 +111,7 @@ background: rgb(75, 79, 105);
                             <div class="form-group row align-items-center mb-0">
                                 <label for="inputEmail3" class="col-md-3 text-right control-label col-form-label"><i class=" fas fa-location-arrow text-info"></i> Region</label>
                                 <div class="col-md-9 border-left pb-2 pt-2">
-                                    <input list="Region" class="form-control" placeholder="{{ $places->regoin->region_name }}" name="region_name">
+                                    <input list="Region" class="form-control" value="{{ $places->regoin->region_name }}" name="region_name">
                                     <datalist id="Region">
                                         <option value="mazza" class="col-12 col-md-2   d-inline border-success"></option>
                                    </datalist>
@@ -184,6 +164,7 @@ background: rgb(75, 79, 105);
                                     
                                                 <th class="text-dark font-weight-bold">Service name</th>
                                                 <th class="text-dark font-weight-bold">Price</th>
+                                                <th class="text-dark font-weight-bold">Place/Room</th>
                                               
                                                 <th class="text-center">
                                                     <div class="action-btn">
@@ -202,6 +183,9 @@ background: rgb(75, 79, 105);
                                                     </td>
                                                     <td>
                                                         <span>{{ $service->price }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span>{{ $service->place_room }}</span>
                                                     </td>
                                                    
                                                     <td class="text-center">
@@ -238,7 +222,11 @@ background: rgb(75, 79, 105);
                             <p class="font-20 font-weight-bolder text-dark">Are you sure to Delete This Row ?</p>
                             <div class="modal-footer">
                                 <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
-                                <a href="remove_To_service/{{ $service->id }}" id="BookingUnConf" class="btn btn-danger">Delete</a>
+                              <form method="Post" action="remove_To_service">@csrf
+                               
+                             <button type="submit" {{ $service->id }} id="BookingUnConf" class="btn btn-danger">Delete</button>
+                             
+                            </form>
                             </div>
                         </div>
                     </div>
@@ -267,7 +255,7 @@ background: rgb(75, 79, 105);
                                         <div class="form-group row">
                                             <label for="cono12" class="col-sm-3 text-right control-label col-form-label">Price</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="GuestNo" placeholder="{{ $service->service_name }}" name="service_name">
+                                                <input type="text" class="form-control" id="GuestNo" value="{{ $service->service_name }}" name="service_name">
                                             </div>
                                         </div>
                                     </div>
@@ -277,7 +265,7 @@ background: rgb(75, 79, 105);
                                         <div class="form-group row">
                                             <label class="col-sm-3 text-right control-label col-form-label">Service Name</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="Price" placeholder="{{ $service->price }}" name="price">
+                                                <input type="number" class="form-control" id="Price" value="{{ $service->price }}" name="price">
                                             </div>
                                         </div>
                                     </div>
@@ -285,6 +273,7 @@ background: rgb(75, 79, 105);
                                
                             </div>
                             <input type="hidden" name="id" value="{{ $service->id }}">
+                            <input type="hidden" value="{{ $places->id }}" name="idplace">
                             <div class="modal-footer">
                                 <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
                                 <button id="BookingUnConf" class="btn btn-success">Update</button>
@@ -333,12 +322,18 @@ background: rgb(75, 79, 105);
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <input list="place/room" name="place_room" class="col-12 col-md-2 mb-2 mb-md-0 d-inline  border-success formSr" placeholder="place/room"  >
+							<datalist id="place/room">
+								
+								<option value="place" name="place_room" class="col-12 col-md-2  d-inline border-success"></option>
+                                <option value="room" name="place_room" class="col-12 col-md-2  d-inline border-success"></option>
+							
+						   </datalist>
                             </div>
                             <div class="modal-footer">
                                 <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
                                 <button type="submit" id="BookingUnConf" class="btn btn-success">Add</button>
-                                <input type="hidden" value="{{ $service->id }}" name="id">
+                                <input type="hidden" value="{{ $places->id }}" name="id">
                             </div>
                         </div>
                     </form>

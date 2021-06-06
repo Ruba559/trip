@@ -117,17 +117,23 @@
                       <div class="message-center position-relative" style="height:auto">
                           <!-- Message -->
                         
-                          @if(Session::has('user'))
-                         
-                          <a href="/logout" class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                           <h5><i class=" fas fa-sign-in-alt text-dark-info"></i> Sign out </h5>
-                          </a>
-                          @endif
-                          @if(!Session::has('user'))
-                          <a href="/login" class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                            <h5><i class=" fas fa-sign-in-alt text-dark-info"></i> Sign in </h5>
+                         @auth()
+                          <li class="nav-item">
+                           <a class="nav-link text-white" href="#">
+                            <a href="/logout" class="message-item d-flex align-items-center border-bottom px-3 py-2">
+                              <h5><i class=" fas fa-sign-in-alt text-dark-info"></i> Sign out </h5>
+                             </a>
                            </a>
-                           @endif
+                          </li>
+                         @else
+                             <a href="/login" class="message-item d-flex align-items-center border-bottom px-3 py-2">
+                             <h5><i class=" fas fa-sign-in-alt text-dark-info"></i> Sign in </h5>
+                              </a>
+                         @endauth
+                      
+                         
+
+            
                           <a href="/register_user" class="message-item d-flex align-items-center border-bottom px-3 py-2">
                               <h5><i class="fas fa-registered text-dark-info"></i> Register </h5>
                              </a>
@@ -136,7 +142,7 @@
                              </a>
                              </div>
                              </li>
-                      
+    
               </ul>
           </div>
       </li>

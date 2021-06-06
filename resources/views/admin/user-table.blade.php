@@ -145,7 +145,7 @@
           </div>
      
           </ul>
-          <a class="nav-link" href="#"><i class="fas fa-sign-out-alt text-white" data-toggle="tooltip" data-placement="bottom" title=" Log out"></i></a> 
+          <a class="nav-link" href="/logout_admin"><i class="fas fa-sign-out-alt text-white" data-toggle="tooltip" data-placement="bottom" title=" Log out"></i></a> 
         </div>
     
       </nav>
@@ -229,7 +229,7 @@
                                         </td>
 										
                                         <td>
-                                            <span class="usr-email-addr" data-email="">{{ $user->Email }}</span>
+                                            <span class="usr-email-addr" data-email="">{{ $user->email }}</span>
                                         </td>
                                         
                                         <td>
@@ -268,7 +268,7 @@
                             <p class="font-20 font-weight-bolder text-dark">Are you sure to Delete This Row ?</p>
                             <div class="modal-footer">
                                 <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
-                                <a href="remove_To_user/{{$user->id}}" id="BookingUnConf" class="btn btn-danger"  >Delete</a>
+                                <a href="remove_To_user/{{ $user->id }} id="BookingUnConf" class="btn btn-danger"  >Delete</a>
                             </div>
                         </div>
                     </div>

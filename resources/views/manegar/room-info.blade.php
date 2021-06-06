@@ -61,7 +61,12 @@
                                 </div>
                         </div>
                     </div>
-                 
+                    @error('count_people')
+                    <span class="text-danger">{{$message}}</span>
+                    @enderror
+                    @error('price')
+                     <span class="text-danger">{{$message}}</span>
+                     @enderror
                     <div class="card card-body">
                         <div class="table-responsive">
                             <table class="table table-striped search-table v-middle">
@@ -103,7 +108,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <img class="srcPhoto" src="{{ $row->price }}"  width="35" data-toggle="modal" data-target="#PhotoModal">
+                                                <img class="srcPhoto" src="{{ asset($row->picture) }}"  width="35" data-toggle="modal" data-target="#PhotoModal">
                                                 <div class="ml-2">
                                                     <div class="user-meta-info">
                                                         <h5 class="TsTherePhoto"></h5>
@@ -113,7 +118,12 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="/index_reservation_user/{{ $row->id }}" class="HrefBooking">Reservation dates</a>
+                                            <form action="reservation_rooom" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $row->id }}">
+                                            
+                                            <button type="submit" class="HrefBooking">Reservation dates</button>
+                                            </form>
                                         </td>
                                         <td class="text-center">
                                             <div class="action-btn">
@@ -134,9 +144,6 @@
             </div>
         
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
     </div>
     
              <!--===========================Delete Row========================-->
@@ -174,6 +181,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <form action="adit_room" method="POST" enctype="multipart/form-data">@csrf
                         <div class="modal-body">
                             <div class="card-body">
                              
@@ -182,7 +190,7 @@
                                         <div class="form-group row">
                                             <label for="cono12" class="col-sm-3 text-right control-label col-form-label">Number of  guest</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="GuestNo" placeholder="Number of guest">
+                                                <input name="count_people" type="text" class="form-control" id="GuestNo" value="{{ $row->count_people }}">
                                             </div>
                                         </div>
                                     </div>
@@ -193,7 +201,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 text-right control-label col-form-label">Price</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="Price" placeholder="Price for night">
+                                                <input name="price" type="text" class="form-control" id="Price" value="{{ $row->price  }}">
                                             </div>
                                         </div>
                                     </div>
@@ -203,7 +211,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 text-right control-label col-form-label">Description</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="Price" placeholder="Price for night">
+                                                <input name="description" type="text" class="form-control" id="Price" value="{{ $row->description }}">
                                             </div>
                                         </div>
                                     </div>
@@ -212,18 +220,20 @@
                                     <div class="col-sm-12">
                                         <div class="form-group row">
                                             <label class="col-sm-3 text-right control-label col-form-label">photo</label>
-                                            <button class="btn btn-light-info mb-2"><label for="RoomPhoto">Change Photo</label> </button>
+                                          <label for="RoomPhoto">Change Photo</label> 
                                                 <img src="../assets/images/background/تنزيل (1).jpg"  width="75%" style="margin-left: 13%;">
-                                                <input type="file" class="d-none" id="RoomPhoto" accept="image/*">
+                                                <input name="pictuer" type="file" class="d-none" id="RoomPhoto" accept="image/*">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
-                                <button id="BookingUnConf" class="btn btn-success"  data-dismiss="modal">Update</button>
+                                <button id="BookingUnConf" class="btn btn-success" >Update</button>
                             </div>
                         </div>
+                        <input type="hidden" name="id" value="{{ $row->id }}">
+                        </form>
                     </div>
                 </div>
                 </div>
@@ -253,9 +263,7 @@
                                             <div class="col-sm-9">
                                                 <input type="number" name="count_people" class="form-control" id="GuestNo" placeholder="Nimber of guest">
                                             </div>
-                                            @error('count_people')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -266,9 +274,7 @@
                                             <div class="col-sm-9">
                                                 <input type="number" name="price" class="form-control" id="Price" placeholder="Price for night">
                                             </div>
-                                            @error('price')
-                                            <span class="text-danger">{{$message}}</span>
-                                            @enderror
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -287,8 +293,9 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 text-right control-label col-form-label">photo</label>
                                            <label for="RoomPhoto">Upload Photo</label>
-                                                <img  width="75%" style="margin-left: 13%;">
-                                                <input name="pictuer" type="file" class="d-none" id="RoomPhoto" >
+                                               
+                                                <input type="file" name="picture" class="d-none" id="RoomPhoto"  accept="image/*">
+                                             
                                         </div>
                                     </div>
                                 </div>

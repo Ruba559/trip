@@ -19,23 +19,18 @@ use App\Http\Requests\RoomRequest;
 class ServiceManegerController extends Controller
 {
 
-    function indexReservation(Request $req , $id)
-    {
 
-        $available =User::with(['available'=> function($query){
-            $query->select(
-             'id',
-            's_date',
-            'e_date',
-            'booking_name',
-            'status',
-            'bill',
-            'paid',
-            'room_id',
-            )->where('room_id' , $id);
-           }])->first();
 
-        return view('manegar.reservation-user', ['availables' => $available ]);
+    function reservationRooom(Request $request)
+    {  
+
+        $available =  Available::where('room_id' , $request->id)->get();
+       
+         $id = $available->pluck('user_id')->toArray();
+         
+         $users = User::where('id' , $id)->first();
+
+        return view('manegar.reservation-user', ['availables' => $available , 'user' => $users ]);
     }
 
 
@@ -56,12 +51,22 @@ class ServiceManegerController extends Controller
         return view('manegar.place-info', ['services' => $service ,'places' =>  $places ]  );
     }
 
+    function index(Request $req)
+    {
+
+        $id_manegar = ServiceManegar::find( auth('serviceManegar')->user()->id);
+
+            $place = Place::find($id_manegar->place_id);
+
+             return view('manegar.index' , ['places' => $place ]);
+    }
+
 
     function roomInfo(Request $request)
     {
     
         $room =Place::with('room')->get();
-        
+
         return view('manegar.room-info' , ['rooms' => $room ]);
     }
 
@@ -84,13 +89,14 @@ class ServiceManegerController extends Controller
              return redirect('/');
      }
 
-     public function editPlace(PlaceRequest $request)
+     public function editPlace(Request $request)
     {
         $place = Place::find($request->idplace);
 
         $regoin = Regoin::find($request->idregoin);
 
        $placePicture = new PlacePicture;
+
         $filePath = "";
 
         if ($request->has('picture')) {
@@ -101,31 +107,66 @@ class ServiceManegerController extends Controller
          $placePicture->picture  = $filePath;
          $placePicture->place_id  = $request->idplace;
 
-         $placePicture->save();
-
-
         $place->address  = $request->address;
         $place->Email    = $request->Email;
-        $place->update();
+       
 
         $regoin->region_name = $request->region_name;
-        $regoin->update();
-      
 
-       return redirect('/place_info');
+        $regoin->update();
+        $place->update();
+        $placePicture->save();
+        
+
+        $places= Place::find($request->idplace);
+        
+        $place = $places->regoin;
+
+        $service = Service::where('place_id', $request->idplace)->get();
+        
+        return view('manegar.place-info', ['services' => $service ,'places' =>  $places ]  );
     }
 
 
 
-    public function editReservation(Request $request , $id)
+    public function editReservation(Request $request)
     {
 
-        $available = Available::find($id);
+        $available = Available::find($request->id);
 
         $available->status  = "1";
 
         $available->update();
+
+        $available =  Available::where('room_id' , $request->room_id)->get();
+       
+        $id = $available->pluck('user_id')->toArray();
+        
+        $users = User::where('id' , $id)->first();
+
+       return view('manegar.reservation-user', ['availables' => $available , 'user' => $users ]);
+
+       return redirect('/index_reservation_user');
+    }
+
+
+    
+    public function aditBill(Request $request)
+    {
+
+        $available = Available::find($request->id);
+
+        $available->paid = $request->paid;
+
+        $available->update();
       
+        $available =  Available::where('room_id' , $request->room_id)->get();
+       
+        $id = $available->pluck('user_id')->toArray();
+        
+        $users = User::where('id' , $id)->first();
+
+       return view('manegar.reservation-user', ['availables' => $available , 'user' => $users ]);
 
        return redirect('/index_reservation_user');
     }
@@ -137,21 +178,33 @@ class ServiceManegerController extends Controller
         $service = Service::find($request->id);
 
         $service->service_name  = $request->service_name;
-        $service->price    = $request->price;
+        $service->price = $request->price;
     
 
         $service->update();
-      
+
+        $places= Place::find($request->idplace);
+        
+        $place = $places->regoin;
+
+        $service = Service::where('place_id', $request->idplace)->get();
+        
+        return view('manegar.place-info', ['services' => $service ,'places' =>  $places ]  );
 
        return redirect('/place_info');
     }
 
-    function removeService($id)
+    function removeService(Request $request)
     {
-         
-        Service::destroy($id);
+       
 
-        return redirect('/place_info');
+        $id_manegar = ServiceManegar::find( auth('serviceManegar')->user()->id);
+
+        $place = Place::find($id_manegar->place_id);
+
+        Service::destroy($request->id);
+         return view('manegar.index' , ['places' => $place ]);
+        
     }
 
     function removeReservation($id)
@@ -159,7 +212,7 @@ class ServiceManegerController extends Controller
          
         Available::destroy($id);
 
-        return redirect('/index_reservation_user');
+        return redirect('/room_info');
     }
 
     function addService (Request $req)
@@ -170,26 +223,41 @@ class ServiceManegerController extends Controller
             $service->service_name=$req->service_name;
             $service->price=$req->price;
             $service->place_id=$req->id;
+            $service->place_room=$req->place_room;
 
         
              $service->save();
 
+             $places= Place::find($req->id);
+        
+             $place = $places->regoin;
+     
+             $service = Service::where('place_id', $req->id)->get();
+             
+             return view('manegar.place-info', ['services' => $service ,'places' =>  $places ]  );
              return redirect()->back();
      }
 
      function addRoom (RoomRequest $request)
     {
               
+        $filePath = "";
+
+        if ($request->has('pictuer')) {
+  
+             $filePath = uploadImage($request->pictuer ,'images');
+          }
+
             $room= new Room;
     
             $room->count_people =$request->count_people ;
             $room->price=$request->price;
             $room->description=$request->description;
-            $room->pictuer=$request->pictuer;
+            $room->pictuer= $filePath;
             $room->is_avalible= "0";
             $room->place_id=$request->id;
         
-             $room->save();
+            $room->save();
 
              return redirect('/room_info');
      }
@@ -202,16 +270,35 @@ class ServiceManegerController extends Controller
         return redirect('/room_info');
     }
 
-    public function aditBill(Request $request)
+
+    public function aditRoom(RoomRequest $request)
     {
 
-        $available = Available::find($request->id);
+        $filePath = "";
 
-        $available->paid = $request->paid;
+        if ($request->has('picture')) {
+  
+             $filePath = uploadImage($request->picture ,'images');
+          }
 
-        $available->update();
+        $room = Room::find($request->id);
+
+        $room->price = $request->price;
+        $room->description = $request->description;
+        $room->count_people = $request->count_people;
+        $room->pictuer  = $filePath ;
+
+        $room->update();
       
 
-       return redirect('/index_reservation_user');
+       return redirect('/room_info');
+    }
+
+
+    public function getLogout()
+    {
+        Auth::logout();
+
+        return redirect('/');
     }
 }

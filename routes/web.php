@@ -31,7 +31,7 @@ Auth::routes();
 
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
@@ -39,6 +39,7 @@ Route::get('/logout',[UserController::class,'getLogout']);
 Route::get('/register_user',[UserController::class,'index']);
 Route::post('/register',[UserController::class,'create']);
 Route::get('/get_account',[UserController::class,'getAccount']);
+Route::post('/update_profile',[UserController::class,'updateProfile']);
 
 
 
@@ -51,7 +52,7 @@ Route::post('/type_house_filter',[SerchController::class,'typeHouseFilter']);
 Route::post('/type_home_filter',[SerchController::class,'typeHomeFilter']);
 Route::post('/type_filter',[SerchController::class,'typeFilter']);
 Route::post('/add_favorite',[SerchController::class,'addFavorite']);
-Route::get('/show_favorite/{id}',[SerchController::class,'showFavorite']);
+Route::post('/show_favorite',[SerchController::class,'showFavorite']);
 Route::post('/select_room',[SerchController::class,'selectRoom']);
 Route::post('/star1_filter',[SerchController::class,'star1Filter']);
 Route::post('/star2_filter',[SerchController::class,'star2Filter']);
@@ -85,16 +86,17 @@ Route::get('/place_info',[ServiceManegerController::class,'placeInfo']);
 
 Route::post('/place_info',[ServiceManegerController::class,'place_info']);
 Route::post('/edit_place_info',[ServiceManegerController::class,'editPlace']);
-Route::get('/remove_To_service/{id}',[ServiceManegerController::class,'removeService']);
+Route::post('/remove_To_service',[ServiceManegerController::class,'removeService']);
 Route::get('/remove_room/{id}',[ServiceManegerController::class,'removeRoom']);
 Route::post('/edit_service_info',[ServiceManegerController::class,'editService']);
 Route::post('/add_service_info',[ServiceManegerController::class,'addService']);
 Route::post('/adit_bill',[ServiceManegerController::class,'aditBill']);
 Route::post('/add_room',[ServiceManegerController::class,'addRoom']);
-Route::get('/index_reservation_user/{id}',[ServiceManegerController::class,'indexReservation']);
 Route::get('/remove_reservation/{id}',[ServiceManegerController::class,'removeReservation']);
-Route::get('/edit_reservation/{id}',[ServiceManegerController::class,'editReservation']);
-
+Route::post('/edit_reservation',[ServiceManegerController::class,'editReservation']);
+Route::post('/adit_room',[ServiceManegerController::class,'aditRoom']);
+Route::post('/reservation_rooom',[ServiceManegerController::class,'reservationRooom']);
+Route::get('/logout_maneger',[ServiceManegerController::class,'getLogout']);
 
 });
 

@@ -14,11 +14,18 @@
     .borderService{
       border: 0.1em solid #9ec2e0
     }
+    #map{
+      height: 100vh;
+      width: 100vw;
+    }
         </style>
         <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
         
     <link href="lib/Pro index.css" rel="stylesheet">
     <link href="lib/footer.css" rel="stylesheet">
+ 
+  
+       <script src="lib/map/script.js" defer></script>
 @endsection
 
 
@@ -93,6 +100,7 @@
                   
                   <div class="navbar-collapse collapse justify-content-center order-2 bg-filter" id="collapsingNavbar">
                       <ul class="navbar-nav  text-white">
+                        @auth()
                         <li class="nav-item dropdown">
                           <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownFavorit" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Favorite
@@ -113,6 +121,7 @@
                             </form>
                          </div>
                       </li>
+                      @endauth
                       <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownPlace" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                          place
@@ -211,60 +220,43 @@
               </nav>
             </div>
            
-       
-        
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
         <div class="page-wrapper p-2">
             
             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
-        
+           
+               
         <div class="row">
             <div class=" col-lg-5 col-xl-12 " id="ResearshDiv">
+           
                 <div class="card shadow mb-4 bg-light">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h6 class="text-primary font-weight-bold m-0">Research result</h6>
                        <span class=" btn btn-rounded btn-outline-info" id="SpanShowMap" onclick="ShowMap()">Show Map</span>
                     </div>
                     <div class="card-body">
+                      @foreach ($places as $item)
+                                        
+                                    
+                      @foreach($item->room as $row)
                         <div class="row">
                             <div class="col-12">
                                  <div class="card">
                                     <div class="card-body"> 
                                         <div class="row">
                                             <div class="col-lg-4 col-md-3">
-        <div class="slider">
-            <div id="main-slider" class="carousel slide" data-ride="carousel">
-         
-          <div class="carousel-inner">
-           
-          <div class="overlay"></div>
-          @foreach($photos as $photo)
+        <div>
+            <div >
+             
             
-            <div class="carousel-item carousel-one carousel-item-next carousel-item-left">
-              <img class="d-block w-100" src="{{ asset($photo->picture) }}" alt="First slide" style="height: 250px">
-            </div>
-            @endforeach
+              <img  src="{{ asset($photos->picture) }}"  style="height: 250px">
+             
+         
         
-          </div>
-           <ol class="carousel-indicators">
-            <li data-target="#main-slider" data-slide-to="0" class="active"></li>
-            <li data-target="#main-slider" data-slide-to="1" class=""></li>
-            <li data-target="#main-slider" data-slide-to="2" class=""></li>
-            <li data-target="#main-slider" data-slide-to="3" class=""></li>
-           
-          </ol>
         </div></div> </div>
         
-        
-        @foreach ($places as $item)
-                                        
-                                    
-        @foreach($item->room as $row)
+     
     
         
                                                <div class="col-lg-8 col-md-9" id="slimtest1">
@@ -290,10 +282,13 @@
                                        
                                         <div class=" m-3 ml-2 w-50 d-inline">
                                           <form action="add_favorite" method="POST">@csrf
+                                            
+                                            <input type="hidden" value="{{ $item->id }}" name="place_id">
 
-                                       <div class=" btn divFav btn-outline-danger"> <button type="submit" class="LableChckboxFav"   for="FavPlce" style="cursor: pointer; " >Add to Favorite</button> <i class='fas fa-heart FavIcon'></i> </div><input type="checkbox" name="favChekbox" id="FavPlce" class="d-none" >
-                                       <input type="hidden" value="{{ $item->id }}" name="id">
+                                       <div class="ml-3 btn divFav btn-outline-danger"> <button type="submit" class="LableChckboxFav btn"   for="FavPlce" style="cursor: pointer; " >Add to Favorite</button><i class='fas fa-heart FavIcon'></i></div><input type="checkbox" name="favChekbox" id="FavPlce" class="d-none" >
+                                       
                                       </form>
+
                                       <form action="rooms" class="btn " method="POST">
                                         @csrf
                               
@@ -302,16 +297,16 @@
                                       </form>
   
                                       </div> 
-                                       <div class="card mb-0 dropdownDiv borderService">
-                                          <div class="card-header  bg-white" id="headingOne">
+                                       <div class="card mb-0 dropdownDiv borderService sr">
+                                          <div class="card-header  bg-white headSer" id="headingOne">
                                               <h5 class="m-0">
-                                                  <a class="custom-accordion-title d-block pt-2 pb-2 collapsed " data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                  <a class="custom-accordion-title d-block pt-2 pb-2 collapsed aSR" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                                       Services <span class="float-right"><i class="mdi mdi-chevron-down accordion-arrow"></i></span>
                                                   </a>
                                               </h5>
                                           </div>
                                         
-                                          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion" >
+                                          <div id="collapseOne" class="collapse colS" aria-labelledby="headingOne" data-parent="#accordion" >
                                               <div class="card-body text-center">
                                               <div class=" dropdownDiv" aria-labelledby="navbarDropdownService">
                                                 
@@ -331,49 +326,40 @@
                                       </div>
         
                                     </div>
-                                    @endforeach
-                                          @endforeach
+                                   
                                   
                                   </div>
                                     </div>
+                                    @endforeach
+                                    @endforeach
                                   
                     </div>
-                </div></div>
+                   
+                </div>
+              </div>
                                    
                                        <!-----------------------End Row----------------------------->
        
                             
                 <!-- --------------------------------Map div -------------------- -->
         
-              
-        
-            
             <div class="col-lg-7 col-xl-5 d-none" id="MapDiv">  
                 <div class="card shadow mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h6 class="text-primary font-weight-bold m-0">The Map</h6>
                         
                     </div>
+
                     <div class="card-body" id="map" style="height: 500px;width: 1000px;">
-                      
-                      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d214479.3955042594!2d36.31771421552651!3d33.48410128782278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sar!2s!4v1621886633759!5m2!1sar!2s" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                     
                      </div>
                 </div>
             </div>
         </div>
             
         </div>
-        
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
     </div>
-          <!-- footer -->
-           
-            <!-- ============================================================== -->
-            <!-- End footer -->
-        
-    <!-- ============================================================== -->
+         
     <!-- End Wrapper -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog mdl" role="document">
@@ -430,11 +416,22 @@
         var SpanShowMap= document.getElementById('SpanShowMap');
         var ValueMonye = document.getElementById("customRange2");
         var price = document.getElementById("price");
+var headingOne =  document.getElementsByClassName("headSer");
+var collapseOne = document.getElementById("collapseOne");
+var sr = document.getElementsByClassName("colS");
+var aSR = document.getElementsByClassName("aSR");
 
 
         var LableChckboxFav = document.getElementsByClassName("LableChckboxFav");
         var divFav = document.getElementsByClassName('divFav');
-       
+        href="#collapseOne"  aria-controls="collapseOne"
+       forfor( i = 0 ; i < aSR.length ; i ++){
+        aSR[i].href="#serv" + i;
+        aSR[i].aria-controls="serv" + i;
+        sr.id="serv" + i;
+        sr[i].aria-labelledby="hdID"+i;
+        headingOne.id="hdID"+i;
+       }
         
 
         for( i = 0 ; i < LableChckboxFav.length ; i ++){
@@ -481,214 +478,97 @@
         }
     </script>
 
-<script>
+
+      
+<script >
 
 
 
-  $("#pac-input").focusin(function() {
-      $(this).val('');
-  });
+// This example adds a search box to a map, using the Google Place Autocomplete
+// feature. People can enter geographical searches. The search box will return a
+// pick list containing a mix of places and predicted search terms.
 
-  $('#latitude').val('');
-  $('#longitude').val('');
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
+function initAutocomplete() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 24.740691, lng: 46.6528521 },
+        zoom: 13,
+        mapTypeId: 'roadmap'
+    });
 
-  // This example adds a search box to a map, using the Google Place Autocomplete
-  // feature. People can enter geographical searches. The search box will return a
-  // pick list containing a mix of places and predicted search terms.
+    // move pin and current location
+    infoWindow = new google.maps.InfoWindow;
+    geocoder = new google.maps.Geocoder();
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            map.setCenter(pos);
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(pos),
+                map: map,
+                title: 'موقعك الحالي'
+            });
+            markers.push(marker);
+            marker.addListener('click', function() {
+                geocodeLatLng(geocoder, map, infoWindow,marker);
+            });
+            // to get current position address on load
+            google.maps.event.trigger(marker, 'click');
+        }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        console.log('dsdsdsdsddsd');
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
 
-  // This example requires the Places library. Include the libraries=places
-  // parameter when you first load the API. For example:
-  // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+    var geocoder = new google.maps.Geocoder();
+    google.maps.event.addListener(map, 'click', function(event) {
+        SelectedLatLng = event.latLng;
+        geocoder.geocode({
+            'latLng': event.latLng
+        }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    deleteMarkers();
+                    addMarkerRunTime(event.latLng);
+                    SelectedLocation = results[0].formatted_address;
+                    console.log( results[0].formatted_address);
+                    splitLatLng(String(event.latLng));
+                    $("#pac-input").val(results[0].formatted_address);
+                }
+            }
+        });
+    });
 
-  function initAutocomplete() {
-      var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 24.740691, lng: 46.6528521 },
-          zoom: 13,
-          mapTypeId: 'roadmap'
-      });
+    function addMarkerRunTime(location) {
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+        markers.push(marker);
+    }
+    function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+        }
+    }
+    function clearMarkers() {
+        setMapOnAll(null);
+    }
+    function deleteMarkers() {
+        clearMarkers();
+        markers = [];
+    }
 
-      // move pin and current location
-      infoWindow = new google.maps.InfoWindow;
-      geocoder = new google.maps.Geocoder();
-      if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-              var pos = {
-                  lat: position.coords.latitude,
-                  lng: position.coords.longitude
-              };
-              map.setCenter(pos);
-              var marker = new google.maps.Marker({
-                  position: new google.maps.LatLng(pos),
-                  map: map,
-                  title: 'موقعك الحالي'
-              });
-              markers.push(marker);
-              marker.addListener('click', function() {
-                  geocodeLatLng(geocoder, map, infoWindow,marker);
-              });
-              // to get current position address on load
-              google.maps.event.trigger(marker, 'click');
-          }, function() {
-              handleLocationError(true, infoWindow, map.getCenter());
-          });
-      } else {
-          // Browser doesn't support Geolocation
-          console.log('dsdsdsdsddsd');
-          handleLocationError(false, infoWindow, map.getCenter());
-      }
-
-      var geocoder = new google.maps.Geocoder();
-      google.maps.event.addListener(map, 'click', function(event) {
-          SelectedLatLng = event.latLng;
-          geocoder.geocode({
-              'latLng': event.latLng
-          }, function(results, status) {
-              if (status == google.maps.GeocoderStatus.OK) {
-                  if (results[0]) {
-                      deleteMarkers();
-                      addMarkerRunTime(event.latLng);
-                      SelectedLocation = results[0].formatted_address;
-                      console.log( results[0].formatted_address);
-                      splitLatLng(String(event.latLng));
-                      $("#pac-input").val(results[0].formatted_address);
-                  }
-              }
-          });
-      });
-      function geocodeLatLng(geocoder, map, infowindow,markerCurrent) {
-          var latlng = {lat: markerCurrent.position.lat(), lng: markerCurrent.position.lng()};
-          /* $('#branch-latLng').val("("+markerCurrent.position.lat() +","+markerCurrent.position.lng()+")");*/
-          $('#latitude').val(markerCurrent.position.lat());
-          $('#longitude').val(markerCurrent.position.lng());
-
-          geocoder.geocode({'location': latlng}, function(results, status) {
-              if (status === 'OK') {
-                  if (results[0]) {
-                      map.setZoom(8);
-                      var marker = new google.maps.Marker({
-                          position: latlng,
-                          map: map
-                      });
-                      markers.push(marker);
-                      infowindow.setContent(results[0].formatted_address);
-                      SelectedLocation = results[0].formatted_address;
-                      $("#pac-input").val(results[0].formatted_address);
-
-                      infowindow.open(map, marker);
-                  } else {
-                      window.alert('No results found');
-                  }
-              } else {
-                  window.alert('Geocoder failed due to: ' + status);
-              }
-          });
-          SelectedLatLng =(markerCurrent.position.lat(),markerCurrent.position.lng());
-      }
-      function addMarkerRunTime(location) {
-          var marker = new google.maps.Marker({
-              position: location,
-              map: map
-          });
-          markers.push(marker);
-      }
-      function setMapOnAll(map) {
-          for (var i = 0; i < markers.length; i++) {
-              markers[i].setMap(map);
-          }
-      }
-      function clearMarkers() {
-          setMapOnAll(null);
-      }
-      function deleteMarkers() {
-          clearMarkers();
-          markers = [];
-      }
-
-      // Create the search box and link it to the UI element.
-      var input = document.getElementById('pac-input');
-      $("#pac-input").val("أبحث هنا ");
-      var searchBox = new google.maps.places.SearchBox(input);
-      map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
-
-      // Bias the SearchBox results towards current map's viewport.
-      map.addListener('bounds_changed', function() {
-          searchBox.setBounds(map.getBounds());
-      });
-
-      var markers = [];
-      // Listen for the event fired when the user selects a prediction and retrieve
-      // more details for that place.
-      searchBox.addListener('places_changed', function() {
-          var places = searchBox.getPlaces();
-
-          if (places.length == 0) {
-              return;
-          }
-
-          // Clear out the old markers.
-          markers.forEach(function(marker) {
-              marker.setMap(null);
-          });
-          markers = [];
-
-          // For each place, get the icon, name and location.
-          var bounds = new google.maps.LatLngBounds();
-          places.forEach(function(place) {
-              if (!place.geometry) {
-                  console.log("Returned place contains no geometry");
-                  return;
-              }
-              var icon = {
-                  url: place.icon,
-                  size: new google.maps.Size(100, 100),
-                  origin: new google.maps.Point(0, 0),
-                  anchor: new google.maps.Point(17, 34),
-                  scaledSize: new google.maps.Size(25, 25)
-              };
-
-              // Create a marker for each place.
-              markers.push(new google.maps.Marker({
-                  map: map,
-                  icon: icon,
-                  title: place.name,
-                  position: place.geometry.location
-              }));
-
-
-              $('#latitude').val(place.geometry.location.lat());
-              $('#longitude').val(place.geometry.location.lng());
-
-              if (place.geometry.viewport) {
-                  // Only geocodes have viewport.
-                  bounds.union(place.geometry.viewport);
-              } else {
-                  bounds.extend(place.geometry.location);
-              }
-          });
-          map.fitBounds(bounds);
-      });
-  }
-  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-      infoWindow.setPosition(pos);
-      infoWindow.setContent(browserHasGeolocation ?
-          'Error: The Geolocation service failed.' :
-          'Error: Your browser doesn\'t support geolocation.');
-      infoWindow.open(map);
-  }
-  function splitLatLng(latLng){
-      var newString = latLng.substring(0, latLng.length-1);
-      var newString2 = newString.substring(1);
-      var trainindIdArray = newString2.split(',');
-      var lat = trainindIdArray[0];
-      var Lng  = trainindIdArray[1];
-
-      $("#latitude").val(lat);
-      $("#longitude").val(Lng);
-  }
-
-</script>
-<script ></script>
+  
 
 </body>
 

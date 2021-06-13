@@ -21,15 +21,17 @@ class ServiceManegarRequest extends FormRequest
      *
      * @return array
      */
+     
     public function rules()
     {
         return [
-            'photo_certificate' => 'required_without:id',
+            
             'first_name' => 'required|string|max:20',
             'last_name' => 'required|string|max:20',
             'phone_number' =>'required|max:20|unique:service_manegars,phone_number,'.$this -> id,
             'Email'  => 'required|email|unique:service_manegars,Email,'.$this -> id,
-            'password'   => 'required_without:id'
+            'password'   => 'required_without:id',
+            'place_name' => 'required|string|max:20'
         ];
     }
 

@@ -24,7 +24,7 @@ use App\Http\Controllers\ServiceManegerController;
 //});
 
 Route::get('/index', function () {
-    return view('profile');
+    return view('final');
 });
 
 Auth::routes();
@@ -59,6 +59,7 @@ Route::post('/star2_filter',[SerchController::class,'star2Filter']);
 Route::post('/star3_filter',[SerchController::class,'star3Filter']);
 Route::post('/star4_filter',[SerchController::class,'star4Filter']);
 Route::post('/star5_filter',[SerchController::class,'star5Filter']);
+Route::post('/final_reservation',[SerchController::class,'finalReservation']);
 
 
 Route::group([ 'middleware'=> 'auth:admin'],function(){

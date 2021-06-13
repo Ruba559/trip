@@ -21,19 +21,27 @@
     <link href="assets/owl.carousel/owl.theme.default.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="lib/style.css" rel="stylesheet">
-
+    <link href="lib/bootstrap.minاhead.css" rel="stylesheet">
     <link href="lib/jquery.raty.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="lib/prism.css">
     <link href="lib/magnific-popup.css" rel="stylesheet">
     <link href="lib/animation.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="lib/bootstrap-material-datetimepicker.css">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
+    type="text/css"
+  />
     
     
-    <link rel="stylesheet" href="../../../../../Room Result_files/Room Result_files/Team-Boxed.css">
-    <link rel="stylesheet" href="../../../../../Room Result_files/Room Result_files/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/Team-Boxed.css">
+  
    
 	<link rel="canonical" href="https://www.wrappixel.com/templates/xtremeadmin/" />
-
+  
 	@yield('content_head')
 </head>
 
@@ -95,7 +103,6 @@
     <script src="lib/app.init.horizontal.js"></script>
     <script src="lib/app-style-switcher.horizontal.js"></script>
 
-   
 
 
 </body>

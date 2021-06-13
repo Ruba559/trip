@@ -15,8 +15,13 @@
     
     .navbar-survival101 .navbar-brand img {
       vertical-align: baseline;
+     
     }
     
+    .navbar-brand img{
+      width: 13%;
+    
+    }
     .navbar-expand-lg .navbar-nav .nav-link {
       color: #fff;
     }
@@ -98,11 +103,17 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-survival101 fixed-top">
   <div class="container">
     <a class="navbar-brand ml-5" href="#">
-      <img src="" width="50" alt="T R I P S A I D">
+      <img src="images/Untitled-1.png" width="70px"  alt="T R I P S A I D">
     </a>
  <div>
-    <ul class="navbar-nav  float-right">
-    
+
+  
+  <ul class="navbar-nav  float-right">
+    @auth()
+ 
+  <a class="nav-link" href="/get_account"><i class="fas fa-user-circle text-white  font-20" data-toggle="tooltip" data-placement="bottom" title=" go to profile page"></i></a>
+ 
+  @endauth
 
       <li class="nav-item dropdown ml-5">
           <a class="nav-link dropdown-toggle" href="" id="2"

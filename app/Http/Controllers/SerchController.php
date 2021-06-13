@@ -23,6 +23,28 @@ class SerchController extends Controller
  
     }
 
+    function finalReservation(Request $request)
+    {
+              
+            $available= new Available;
+    
+            $available->booking_name = $request->booking_name;
+            $available->s_date = $request->s_date;
+            $available->e_date = $request->e_date;
+
+            $available->room_id  = $request->price;
+            $available->bill  = $request->id;
+            
+            $available->status = '0';
+            $available->paid = '0';
+
+            $available->user_id = auth()->user()->id;
+        
+             $available->save();
+
+             return redirect('/');
+    }
+
     function searching(Request $request)
     { 
 
@@ -52,10 +74,10 @@ class SerchController extends Controller
                          'is_avalible',
                          'place_id',
                          )->paginate(2);
-                        }])->where('place_type' , $place_type )->get();
+                        }])->where('place_type' , $place_type)->get();
 
                         $place_ids = $place->pluck('id')->toArray();
-                         
+                        
                 }
           }
 
@@ -65,8 +87,8 @@ class SerchController extends Controller
             ->get();
 
 
-          $photo = PlacePicture::whereIn('place_id' , $place_ids)
-          ->get();
+          $photo = PlacePicture::where('place_id' , $place_ids)
+          ->first();
 
 
           $services_f = Service::get();
@@ -89,19 +111,25 @@ class SerchController extends Controller
         $room = Room::where('place_id' , $id)->get();
 
         $service = Service::where('place_id' , $id)->where('place_room' , 'room')->get();
+
+        $placePicture = PlacePicture::where('place_id' , $id)->get();
       
-         return view('rooms',['rooms' => $room , 'places' => $place , 'services' => $service]);   
+         return view('rooms',['rooms' => $room , 'places' => $place , 'services' => $service , 'placePicture' => $placePicture]);   
  
     }
 
     function selectRoom(Request $request)
     { 
 
-     $room_select = Room::where('id' ,  $request->id)->first();
+       $room_select = Room::find($request->id);
 
-   //  $place_select = $room->place;
+       $Room = Room::find($request->id);
 
-         return view('rooms', ['rooms_select' => $room_select] );   
+       $Room->is_avalible  = "1";
+
+       $Room->update();
+
+         return view('final', ['rooms_selects' => $room_select] );   
  
     }
 
@@ -257,7 +285,7 @@ class SerchController extends Controller
 
      $favorite= new Favorite;
     
-     $favorite->user_id = '1';
+     $favorite->user_id = auth()->user()->id;
      //auth::user('api')->id;
      $favorite->place_id =$request->id;
      
@@ -271,8 +299,8 @@ class SerchController extends Controller
     function showFavorite(Request $request)
     { 
 
-     $place_ids = Favorite::where('place_id' , $request->id )->get()->pluck('place_id')->toArray();
-
+     $place_ids = Favorite::where('user_id' , auth()->user()->id )->where('place_id' , $request->place_id)->get()->pluck('place_id')->toArray();
+return $place_ids ;
      $place =Place::with(['room'=> function($query){
           $query->select(
            'id',
@@ -283,7 +311,7 @@ class SerchController extends Controller
           'place_id',
           )->where('is_avalible' , '1');
          }])->where('id', $place_ids)->get();
-
+         
          $service = Service::whereIn('place_id' , $place_ids)
          ->get();
 

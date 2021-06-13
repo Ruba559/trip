@@ -36,7 +36,7 @@
             <img src="" alt="Logo">
             <h3>Welcome !</h3>
             <p>You can add your place to the site so that others can find it easily and book it</p>
-            <form action="register_servicemanegar-" method="POST">
+            <form action="register_servicemanegar-" method="POST" enctype="multipart/form-data">
                 @csrf
             <input type="submit" name="" value="Regiser"><br>
         </div>
@@ -57,36 +57,40 @@
                     <div class="row register-form">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="First Name *" value="" name="first_name">
+                                <input type="text" class="form-control" value="{{ old('first_name') }}" placeholder="First Name *" value="" name="first_name">
                             </div>
                             @error('first_name')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Last Name *" value="" name="last_name">
+                                <input type="text" class="form-control"  value="{{ old('last_name') }}" placeholder="Last Name *" value="" name="last_name">
                             </div>
                             @error('last_name')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password *" value="" name="password">
+                                <input type="password" class="form-control"  placeholder="Password *" value="" name="password">
                             </div>
                             @error('password')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
+
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Confirm Password *" value="" name="confirm_password">
+                            </div>
                             <div class="form-group">
                                
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Your Email *" value="" name="Email">
+                                <input type="email" class="form-control" value="{{ old('Email') }}" placeholder="Your Email *" value="" name="Email">
                             </div>
                             @error('Email')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
                             <div class="form-group">
-                                <input type="text" minlength="10" maxlength="10"  class="form-control" placeholder="Your Phone *" value="" name="phone_number">
+                                <input type="text" minlength="10" maxlength="10"  value="{{ old('phone_number') }}" class="form-control" placeholder="Your Phone *" value="" name="phone_number">
                             </div>
                             @error('phone_number')
                             <span class="text-danger">{{$message}}</span>
@@ -99,9 +103,21 @@
                             @error('photo_certificate')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
+
+                            <div class="form-group">
+                                <input type="text" value="{{ old('place_name') }}" class="form-control" placeholder="Your Place *" value="" name="place_name">
+                            </div>
+                            @error('place_name')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
                 </div>
+                @if(Session::has('message'))
+                     
+                {{Session::get('message')}}
+                 
+                               @endif
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     
                     <h3 class="register-heading">Place information</h3>

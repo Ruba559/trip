@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ServiceManegarRequest;
 use App\Http\Requests\PlaceRequest;
 use App\Http\Requests\RoomRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceManegerController extends Controller
 {
@@ -25,10 +26,10 @@ class ServiceManegerController extends Controller
     {  
 
         $available =  Available::where('room_id' , $request->id)->get();
-       
+        
          $id = $available->pluck('user_id')->toArray();
-         
-         $users = User::where('id' , $id)->first();
+   
+         $users = User::where('id', $id)->first();
 
         return view('manegar.reservation-user', ['availables' => $available , 'user' => $users ]);
     }
@@ -73,20 +74,45 @@ class ServiceManegerController extends Controller
 
     function create(ServiceManegarRequest $request)
     {
-              
+     
+
+        $filePath = " ";
+
+        if ($request->has('photo_certificate')) {
+  
+             $filePath = uploadImage($request->photo_certificate ,'images');
+          }      
+
             $user= new ServiceManegar;
+            $place= new Place;
     
             $user->first_name=$request->first_name;
             $user->last_name=$request->last_name;
             $user->Email=$request->Email;
             $user->password=Hash::make($request->password);
             $user->phone_number=$request->phone_number;
-            $user->photo_certificate=$request->photo_certificate;
-            $user->is_a_proven ="0";
-            $user->place_id= "1";
+            $user->photo_certificate = $filePath;
+            $user->is_a_proven ="0"; 
+            $user->place_name=$request->place_name;
+           
+           
+            $place->place_name = $request->place_name;
+           // $id = Place::where('place_name', $request->place_name)->get()->pluck('id')->toArray();
+        
+          
+
+            if($request->password !=$request->confirm_password)
+            {
+                 return redirect()->back()->with(['message' => 'wrong to confirm password']);
+            }
+
+            else {
+
             $user->save();
+            $user->place();
 
              return redirect('/');
+            }
      }
 
      public function editPlace(Request $request)

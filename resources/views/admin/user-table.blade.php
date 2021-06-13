@@ -240,40 +240,40 @@
                                         </td>
 										
                                         <td class="text-center">
-                                            <div class="action-btn">
-                                                <a class="text-dark ml-2" ><i class="mdi mdi-delete font-20" data-toggle="modal" data-target="#centermodal"></i></a>
-                                            </div>
-                                        </td>
-									</tr>
-                                    <!-- /.row -->
-									
-                                </tbody>
-                           	
+                                          <div class="action-btn">
+                                              <a class="text-dark ml-2" ><i class="mdi mdi-delete font-20" data-toggle="modal" data-target="#centermodal"></i></a>
+                                          </div>
+                                      </td>
+                </tr>
+                                  <!-- /.row -->
+                
+                              </tbody>
                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-         
-             <div class="modal fade" id="centermodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header bg-danger">
-                            <h5 class="modal-title  text-white" id="exampleModalLongTitle">Delete this Row</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="font-20 font-weight-bolder text-dark">Are you sure to Delete This Row ?</p>
-                            <div class="modal-footer">
-                                <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
-                                <a href="remove_To_user/{{ $user->id }} id="BookingUnConf" class="btn btn-danger"  >Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
+                         
+                      </div>
+                  </div>
+              </div>
+          </div>
+       
+           <div class="modal fade" id="centermodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header bg-danger">
+                          <h5 class="modal-title  text-white" id="exampleModalLongTitle">Delete this Row</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <p class="font-20 font-weight-bolder text-dark">Are you sure to Delete This Row ?</p>
+                          <div class="modal-footer">
+                              <button id="BookingConf" class="btn btn-light-info deleteRow" data-dismiss="modal">Cancel</button>
+                              <a href="remove_To_user/{{$user->id}}" id="BookingUnConf" class="btn btn-danger"  >Delete</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              </div>
                 @endforeach
             </table>
                 <!--===========================EndDelete Row========================-->

@@ -74,13 +74,22 @@ class UserController extends Controller
             $user->last_name=$request->last_name;
             $user->email=$request->email;
             $user->password=Hash::make( $request->password);
+           
             $user->phone_number=$request->phone_number;
             $user->picture= $filePath;
             $user->birthday=$request->birthday;
+           
+            if($request->password !=$request->confirm_password)
+            {
+                 return redirect()->back()->with(['message' => 'wrong to confirm password']);
+            }
+            else {
 
-             $user->save();
-    
-             return redirect('/');
+                $user->save();
+
+                return redirect('/login');
+            }
+            
      }
 
     

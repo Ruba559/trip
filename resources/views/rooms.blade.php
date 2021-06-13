@@ -77,6 +77,7 @@
 
 	</style>
     <link href="lib/footer.css" rel="stylesheet">
+  
 @endsection
 
 
@@ -84,6 +85,7 @@
 
 
 <body style="background-color: #eef4f7">
+    <header class="masthead" style="background-image:url('') ">
 
                   <div class="overlay"></div>
                  
@@ -94,11 +96,11 @@
                                   <h1 class="text-white" style="text-shadow: 0.05em 0.08em 0.1em #272626;">{{ $places->place_name }}</h1>
                                 
                               </div>
-                          </div>
+                          </div> 
                       </div>
                   </div>
                   
-             
+    </header>
              
               
            
@@ -124,26 +126,19 @@
 
                           <!--------====================place photos tab===========-->
                           <div class="tab-pane fade show active" id="pill1">
-                              <div class=" zoom-gallery img-fluid ">
+                              <div class=" zoom-gallery img-fluid" style="width
+                              50%"> 
                                   <!------href all photo-->
-                                  <a href="../assets/images/background/images (5).jpg" title="."> </a>
-                                  <a href="../assets/images/background/تنزيل (1).jpg" title="."> </a>
-                                  <a href="../assets/images/background/تنزيل (2).jpg"></a>
-                                 
+                                  @foreach($placePicture as  $placePictures)
+                                  <a href="{{ asset($placePictures->picture) }}" title=".">  <img src="{{ asset($placePictures->picture) }}" class=" col-md-3" alt="img" style="height: 150px;"/> </a>
+                                
                                       <!----img-->
-                                   
-                                      <a href="../assets/images/background/تنزيل (2).jpg" title=".">
-                                          <img src="../assets/images/background/تنزيل (2).jpg" class=" col-md-3" alt="img" /> </a>
-                                          <a href="../assets/images/background/تنزيل (1).jpg" title=".">
-                                              <img src="../assets/images/background/تنزيل (1).jpg" class=" col-md-3" alt="img"  /> </a>
-                                      
-                                              <a href="../assets/images/background/images (5).jpg" title=".">
-                                                  <img src="../assets/images/background/images (5).jpg" class=" col-md-3" alt="img"  /> </a>
-
-                                                  <a href="../assets/images/background/تنزيل (1).jpg" title=".">
-                                                      <img src="../assets/images/background/تنزيل (1).jpg" class=" col-md-3" alt="img"  /> </a>
-                                            <a href="../assets/images/background/تنزيل (2).jpg" title=".">
-                                          <img src="../assets/images/background/تنزيل (2).jpg" class=" col-md-3" alt="img" /> </a> 
+                                  
+                                       
+                
+                                         
+                                        @endforeach</a>
+                                         
                                       </div>
                           </div>
                           <!--------====================place Info tab===========-->
@@ -188,18 +183,22 @@
                
                           <div class="col-md-6 col-lg-4 item">
                               <div class="box">
-                                  <div  style="height: 200px; background-color: #fdfeff;">
-                                      <a class="image-popup-no-margins" href="users table.jpg" ><img  src="users table.jpg"/></a>
-                                  </div>
+                                  <div  style=" background-color: #fdfeff;">
+                                    <div style="height: 100px">
+                                      <a class="image-popup-no-margins" href="{{ asset($row->pictuer) }}" ><img  src="{{ asset($row->pictuer) }}"  style="height: 100px"/></a>
+                                    </div>
                                   <form action="select_room" method="POST">
                                       @csrf
                                   <h3 class="name CntRoom">Room </h3>
                                    <p class="text-info"><span class="title text-info">{{ $row->price }}</span><i class="fas fa-dollar-sign"></i> for night</p>
                                   <p class="description">{{ $row->description }}&nbsp;<br></p>
                                   <input type="hidden" value="{{ $row->id }}" name="id"> 
+
+                                  
                                   <button class="btn btn-primary selectRoom" type="submit">SELECT ROOM</button>
-                                 
+                               
                                   </form>
+                                </div>
                                 </div>
                           </div>
                           @endforeach
@@ -211,15 +210,20 @@
             
               <section>
                   <center>
+
+                    @auth()
                     <div class="sec">
                         <div class="paymentMechanism font-18 d-inline">Select the rooms you want to book and press <span class="font-weight-bolder">Reserve</span> to proceed to the next reservation procedures</div>
-                    <a href="login" class="btn btn-primary ml-1" style="margin-bottom: 2%;">Reserve</a>
+                    <a href="" class="btn btn-primary ml-1" style="margin-bottom: 2%;">Reserve</a>
                 </div>
+                   @else
+                   <div class="sec">
+                    <div class="paymentMechanism font-18 d-inline">Select the rooms you want to book and press <span class="font-weight-bolder">Log in</span> to proceed to the next reservation procedures</div>
+                   <a href="/login" target="_blank" class="btn btn-primary ml-1" style="margin-bottom: 2%;">Log in</a>
+                   @endauth
+                   
 
-                  <div class="sec">
-                      <div class="paymentMechanism font-18 d-inline">You are not logged in , you must<span class="font-weight-bolder"> log in </span>and return to this page to complate the reservation procedures</div>
-                  <a href="login" class="btn btn-primary ml-1" style="margin-bottom: 2%;" target="_blank">Login</a>
-              </div>
+                 
           </center>
               </section>
             </div>
@@ -230,25 +234,7 @@
 
                 
                     <!--=============================================End header=================================-->
-                    <div class="container mt-3">
-                        <div class="card">
-                            
-                            <div class="card-body">
-                               <h1>Confirm reservation</h1>
-                               <hr>
-                        <p class="text-dark">The reservation is recorded in the name of the current account .... At least half of the amount must be paid before the lapse of 24 hours since the confirmation of the reservation in order for the reservation to be confirmed</p>
-                        <span><strong class="text-dark font-italic"> </span>the account : </strong> </span><span>5584-5874-963</span><br>
-                        <p><strong class="text-dark font-italic"> bill :</strong> <span id="bill">0</span> $</p>
-                        <p><strong class="text-dark font-italic"> number of room : </strong> <span id="NOfRoomSpan">0</span></p>
-                        <p><strong class="text-dark font-italic"> for any problem please contact with us</strong></p>
-                        <span> four season.25@gmail.com</span>
-                        <div class="alert alert-danger mt-3" role="alert">
-                           <strong>confirm - </strong> I have read the reservation condition  <button class="btn btn-danger ml-2">Reserve</button>
-                       </div>
-                        
-                       </div>
-                       </div>
-                  </div>
+                    
                             
                      <!---====================================Room===============================-->
                   

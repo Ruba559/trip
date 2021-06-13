@@ -129,7 +129,7 @@
           </div>
      
           </ul>
-          <a class="nav-link" href="#"><i class="fas fa-user-circle text-white  font-20" data-toggle="tooltip" data-placement="bottom" title=" go to profile page"></i></a>
+         
           <a class="nav-link" href="/logout_maneger"><i class="fas fa-sign-out-alt text-white" data-toggle="tooltip" data-placement="bottom" title=" Log out"></i></a> 
         </div>
     

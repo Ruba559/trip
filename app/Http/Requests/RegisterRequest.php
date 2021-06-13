@@ -30,6 +30,7 @@ class RegisterRequest extends FormRequest
             'phone_number' =>'required_without:id|max:20|unique:users,phone_number,'.$this -> id,
             'email'  => 'required_without:id|email|unique:users,email,'.$this -> id,
             'password'   => 'required_without:id'
+            
         ];
     }
 

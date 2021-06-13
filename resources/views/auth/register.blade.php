@@ -52,25 +52,25 @@
                                 <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="First Name *" value="" name="first_name">
+                                            <input type="text" class="form-control" value="{{ old('first_name') }}" placeholder="First Name *"  name="first_name">
                                         </div>
                                         @error('first_name')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Last Name *" value="" name="last_name">
+                                            <input type="text" class="form-control" value="{{ old('last_name') }}" placeholder="Last Name *"  name="last_name">
                                         </div>
                                         @error('last_name')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
                                         <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="Password *" value="" name="password">
+                                            <input type="password" class="form-control" placeholder="Password *"  name="password">
                                         </div>
                                         @error('password')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
                                         <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="Confirm Password *" value="">
+                                            <input type="password" class="form-control" placeholder="Confirm Password *"  name="confirm_password">
                                         </div>
                                         <div class="form-group">
                                            
@@ -78,25 +78,29 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your Email *" value="" name="email">
+                                            <input type="email" class="form-control" value="{{ old('email') }}" placeholder="Your Email *"  name="email">
                                         </div>
                                         @error('email')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
                                         <div class="form-group">
-                                            <input type="text" minlength="10" maxlength="10"  class="form-control" placeholder="Your Phone *" value=""  name="phone_number">
+                                            <input type="text" minlength="10" maxlength="10" value="{{ old('phone_number') }}" class="form-control" placeholder="Your Phone *"  name="phone_number">
                                         </div>
                                         @error('phone_number')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
                                         <div class="form-group">
-                                            <input type="text" class="mdate form-control "placeholder="date of birth" name="birthday">
+                                            <input type="date" class="mdate form-control "placeholder="date of birth" value="{{ old('birthday') }}" name="birthday">
                                         </div>
                                         <div class="form-group">
-                                            <label for="cert" class="btn"style="border:1px solid #ccc ;width: 100%;">Add Picture</label>
+                                            <label for="cert" class="btn"style="border:1px solid #ccc ;width: 100%;">Add Picture Personal</label>
                                             <input type="file" class="d-none"  accept="image/*" id="cert" name="picture">
                                         </div>
-                                      
+                                        @if(Session::has('message'))
+                     
+                                        {{Session::get('message')}}
+                                         
+                                                       @endif
                                     </div>
                                 </div>
                             </div>

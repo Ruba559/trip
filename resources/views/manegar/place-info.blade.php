@@ -167,9 +167,7 @@ background: rgb(75, 79, 105);
                                                 <th class="text-dark font-weight-bold">Place/Room</th>
                                               
                                                 <th class="text-center">
-                                                    <div class="action-btn">
-                                                        <sapn class="delete-multiple  text-danger"></a><i class="fas fa-trash font-20 font-medium"></i> Delete Service</span>
-                                                    </div>
+                                                   
                                                 </th>
                                             </thead>
                                             <tbody>

@@ -2,8 +2,8 @@
 
 
 <footer class="site-footer">
-  <div class="container">
-    <div class="row">
+  <div class="container dis">
+    <div class="row " >
       <div class="col-sm-12 col-md-6">
         <h6>About</h6>
         <p class="text-justify">Our website aims to facilitate remote reservations processes by offering<i class="text-muted"> Users </i> the available rooms at the specified time with the possibility of booking in the right place also. <i class="text-muted"> The owners of hotels and overnight stays </i> can display their properties on the site and thus they can get customers easily</p>

@@ -21,9 +21,11 @@ class ServiceManegar extends Authenticatable
         'phone_number' ,
         'password'   ,
         'is_a_proven',
-         'photo_certificate',
-        'created_at ',
-        'updated_at ',
+        'photo_certificate',
+        'birthday',
+        'place_name',
+        'created_at',
+        'updated_at',
         
 ];
 

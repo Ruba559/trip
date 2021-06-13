@@ -203,9 +203,7 @@
                 
 									<th class="text-dark font-weight-bold"><i class=" fas fa-warehouse"></i> Place type</th>
 									<th class="text-center">
-                                        <div class="action-btn">
-                                            <a href="javascript:void(0)" class="text-danger"><i class="fas fa-trash font-18 font-medium"></i> Delete</a>
-                                        </div>
+                                       
                                     </th>
                                    
                                 </thead>

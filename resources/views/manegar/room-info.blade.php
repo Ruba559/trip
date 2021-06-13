@@ -3,8 +3,8 @@
 
 @section('content_head')
 
-
 <link href="lib/footer.css" rel="stylesheet">
+
 @endsection
 
 @section('content')
@@ -57,7 +57,7 @@
                                     </form>
                                 </div>
                                 <div class="col-md-8 text-right d-flex justify-content-md-end justify-content-center mt-3 mt-md-0">
-                                        <a href="#"  class="btn btn-info" data-toggle="modal" data-target="#AddRoom"><i class="mdi mdi-plus font-16 mr-1"></i> Add Room</a>
+                                        <a href="javascript:void(0)"  class="btn btn-info" data-toggle="modal" data-target="#AddRoom"><i class="mdi mdi-plus font-16 mr-1"></i> Add Room</a>
                                 </div>
                         </div>
                     </div>
@@ -79,9 +79,7 @@
                                     <th class="text-dark font-weight-bold">Photo</th>
                                     <th class="text-dark font-weight-bold"></th>
                                     <th class="text-center">
-                                        <div class="action-btn">
-                                            <sapn class="delete-multiple  text-danger"></a><i class="fas fa-trash font-20 font-medium"></i> Delete Row</span>
-                                        </div>
+                                        
                                     </th>
                                 </thead>
                                 <tbody>
@@ -108,14 +106,16 @@
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <img class="srcPhoto" src="{{ asset($row->picture) }}"  width="35" data-toggle="modal" data-target="#PhotoModal">
+                                               
                                                 <div class="ml-2">
                                                     <div class="user-meta-info">
                                                         <h5 class="TsTherePhoto"></h5>
-                                                     
+                                                        <img class="srcPhoto" src="{{ asset($row->picture) }}"  width="100" data-toggle="modal" data-target="#PhotoModal">
                                                     </div>
                                                 </div>
+                                               
                                             </div>
+                                          
                                         </td>
                                         <td>
                                             <form action="reservation_rooom" method="POST">
@@ -315,10 +315,6 @@
                 <!--===========================EndAdd Row========================-->
 
 
-                @endforeach
-                @endforeach
-            </tbody>
-        </table>
      <!--=================== Photo Room  modal===========================-->
 
      <div class="modal fade" id="PhotoModal" tabindex="-1" role="dialog"
@@ -327,12 +323,16 @@
          <div class="modal-content">
              
              <div class="modal-body p-0">
-                <img src="../assets/images/background/تنزيل (1).jpg" width="100%">
+                <img class="srcPhoto" src="{{ asset($row->picture) }}"  width="100">
              </div>
          </div><!-- /.modal-content -->
      </div><!-- /.modal-dialog -->
  </div><!-- /.modal -->
 
+ @endforeach
+ @endforeach
+</tbody>
+</table>
  <script>
     var IsThrePhoto = document.getElementsByClassName("TsTherePhoto");
     var RoomImg = document.getElementsByClassName("srcPhoto");

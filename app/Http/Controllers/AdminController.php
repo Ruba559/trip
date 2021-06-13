@@ -37,7 +37,7 @@ class AdminController extends Controller
     function userTable()
     { 
 
-        $user = User::orderBy('created_at', 'desc')->get();
+        $user = User::get();
 
         return view('admin.user-table',['users' =>  $user ]); 
  
@@ -45,6 +45,7 @@ class AdminController extends Controller
 
     function removePlace($id)
     {
+
         Place::destroy($id);
 
         return redirect('place_table');
@@ -53,8 +54,8 @@ class AdminController extends Controller
 
     function removeUser($id)
     {
-        
-        User::destroy($id);
+        dd($id);
+        User::find($id)->delete();
 
         return redirect('user_table');
     }
@@ -66,7 +67,7 @@ class AdminController extends Controller
         $servicemanegarnotproven =ServiceManegar::where('is_a_proven',"0")->get();
  
         $servicemanegarproven =ServiceManegar::where('is_a_proven',"1")->get();
-    
+   
         return view('admin.service' ,  ['servicemanegarsnotproven' => $servicemanegarnotproven , 'servicemanegarsproven' => $servicemanegarproven]); 
  
     }

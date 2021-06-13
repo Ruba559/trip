@@ -198,7 +198,8 @@
                                                     <th>Last Name</th>
                                                     <th data-breakpoints="xs sm">Mobile No</th>
                                                     <th data-breakpoints="xs">Email</th>
-                                                    <th data-breakpoints="xs">Date of Birth</th>  
+                                                    <th data-breakpoints="xs">Date of Birth</th> 
+                                                    <th data-breakpoints="xs">Place</th> 
                                                     <th data-breakpoints="xs" >Certificate</th>
                                                     <th data-breakpoints="xs">IsProven</th>  
                                                     <th data-breakpoints="xs">Delete</th>  
@@ -211,17 +212,12 @@
                                                    
                                                     @foreach ($servicemanegarsnotproven as $item)
                     
-                                                    
-                                                    <td>
-                                                        <a href="javascript:void(0)"><img
-                                                                src="../assets/images/users/4.jpg" alt="user" width="40"
-                                                                class="rounded-circle" />{{ $item->first_name }}</a>
-                                                    </td>
-                                                    
+                                                    <td>{{ $item->first_name }}</td>
                                                     <td>{{ $item->last_name }}</td>
                                                     <td>{{ $item->phone_number }}</td>
                                                     <td>{{ $item->Email }}</td>
-                                                    <td><span class="label label-danger">   1/2/1998</span> </td>
+                                                    <td>{{ $item->birthday }} </td>
+                                                    <td><span >{{ $item->place_name }}</span> </td>
                                                     <td><button type="button" class="btn btn-light-info" data-toggle="modal"
                                                         data-target="#bs-example-modal-lg">Show the certificate </button></td>
                                                     <td>
@@ -232,6 +228,17 @@
                                                         <a href="remove_service_manegar/{{ $item->id }}" id="BookingUnConf" class="btn btn-danger">Delete</a>
                                                     </td>
                                                 </tr>
+                                                <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog"
+                                                aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg ">
+                                                    <div class="modal-content">
+                                                        
+                                                        <div class="modal-body p-0">
+                                                           <img src="{{ asset($item->photo_certificate ) }}">
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
                                                 @endforeach
                                                 </tbody>
                                         </table>
@@ -267,6 +274,7 @@
                                                 <th data-breakpoints="xs sm">Mobile No</th>
                                                 <th data-breakpoints="xs">Email</th>
                                                 <th data-breakpoints="xs">Date of Birth</th> 
+                                                <th data-breakpoints="xs">place</th> 
                                                 <th data-breakpoints="xs">Delete
                                                 </th> 
                                                 
@@ -278,16 +286,14 @@
                                             <tr data-expanded="false" class="search-items">
                                             
                                                 <td>
-                                                    <a href="javascript:void(0)"><img
-                                                            src="../assets/images/users/4.jpg" alt="user" width="40"
-                                                            class="rounded-circle" /> {{ $servicemanegarproven->first_name }} </a>
+                                                    {{ $servicemanegarproven->first_name }} 
                                                 </td>
                                                 
                                                 <td> {{ $servicemanegarproven->last_name }}</td>
                                                 <td>{{ $servicemanegarproven->phone_number }}</td>
                                                 <td>{{ $servicemanegarproven->Email }}</td>
-                                                <td><span class="label label-danger">   1/2/1998</span> </td>
-                                            
+                                                <td>{{ $servicemanegarproven->birthday }}</td>
+                                                <td>{{ $servicemanegarproven->place_name }}</td>
                                             
                                                 <td><a class="text-dark ml-2" ><i class="mdi mdi-delete font-20" data-toggle="modal" data-target="#centermodal"></i></a>
                                                 </td>
@@ -360,17 +366,7 @@
 
                       <!--====================certificate  modal===========================-->
     
-                    <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog"
-                                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg ">
-                                            <div class="modal-content">
-                                                
-                                                <div class="modal-body p-0">
-                                                   <img src="images/aaa.jpg">
-                                                </div>
-                                            </div><!-- /.modal-content -->
-                                        </div><!-- /.modal-dialog -->
-                                    </div><!-- /.modal -->
+                   
     
             </div>
            
